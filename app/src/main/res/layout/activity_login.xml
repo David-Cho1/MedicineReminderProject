@@ -18,12 +18,13 @@
 
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topContainer"
+            android:id="@+id/topContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="#F6D0F2"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
+
     </FrameLayout>
 
 
@@ -115,6 +116,18 @@
             android:text="Sign Up"
             android:textColor="#FF4545" />
     </FrameLayout>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/bottomContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F6D0F2"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
