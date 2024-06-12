@@ -1,9 +1,11 @@
 package com.example.medicinereminderproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,11 +62,14 @@ public class SignupPage extends AppCompatActivity {
                 for (int i = 0; i < email.length(); i++) {
                     if (email.charAt(i) == characterAt) {
                         numberOfAt++;
+
                     }
                     if (email.charAt(i) == characterDot) {
                         numberOfDot++;
                     }
                 }
+                Log.d("@", "" + numberOfAt);
+                Log.d(".", "" + numberOfDot);
 
                 // Email Check
                 // If the Edit Text Box it left blank, show error
@@ -130,10 +135,29 @@ public class SignupPage extends AppCompatActivity {
                 // If they are all valid, insert the data to the database
                 if (emailValid == true && passwordValid == true && confirmValid == true) {
                     Boolean insert = databaseHelper.insertData(email, password);
+
+                    if (insert == true) {
+                        Toast.makeText(SignupPage.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(SignupPage.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
+
+
             }
         });
 
+        binding.LoginTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                startActivity(intent);
+            }
+        });
     }
 }
 
