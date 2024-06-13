@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,40 +15,46 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.medicinereminderproject.databinding.ActivitySignupBinding;
 
 public class SignupPage extends AppCompatActivity {
 
     // Importing Classes
-    ActivitySignupBinding binding;
     DatabaseHelper databaseHelper;
+
+    // Buttons
+    Button signButton = findViewById(R.id.signUpButton);
+
+
+    // Edit textview
+    EditText emailBox = findViewById(R.id.editTextEmailAddress);
+    EditText passwordBox = findViewById(R.id.editTextPassword);
+    EditText confirmBox = findViewById(R.id.editTextTextPasswordConfirm);
 
     // Error messages
     TextView errorEmail = findViewById(R.id.tvErrorEmail);
     TextView errorPassword = findViewById(R.id.tvErrorPassword);
     TextView errorConfirm = findViewById(R.id.tvErrorConfirmPassword);
-
+    TextView relocateLogin = findViewById(R.id.LoginTextButton);
 
     // Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_signup);
 
         // Making intense for Database Helper
         databaseHelper = new DatabaseHelper(this);
 
         // Listen to the button to clicked
-        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+        signButton.setOnClickListener(new View.OnClickListener() {
 
             // When the Signup button is clicked
             @Override
             public void onClick(View v) {
-                String email = binding.editTextEmailAddress.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
-                String confirmPasword = binding.editTextTextPasswordConfirm.getText().toString();
+                String email = emailBox.getText().toString();
+                String password = passwordBox.getText().toString();
+                String confirmPasword = confirmBox.getText().toString();
 
                 char characterAt = '@';
                 char characterDot = '.';
@@ -115,7 +123,6 @@ public class SignupPage extends AppCompatActivity {
                 }
                 else if (!confirmPasword.equals(password)){
                     errorConfirm.setText("* Password doesn't match");
-
                 }
                 else {
                     confirmValid = true;
@@ -151,7 +158,7 @@ public class SignupPage extends AppCompatActivity {
             }
         });
 
-        binding.LoginTextButton.setOnClickListener(new View.OnClickListener() {
+        relocateLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginPage.class);

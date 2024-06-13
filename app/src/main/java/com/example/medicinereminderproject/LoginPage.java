@@ -26,7 +26,7 @@ public class LoginPage extends AppCompatActivity {
         sendSignUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this, AlarmSetPage.class));
+                startActivity(new Intent(LoginPage.this, SignupPage.class));
             }
         });
     }
