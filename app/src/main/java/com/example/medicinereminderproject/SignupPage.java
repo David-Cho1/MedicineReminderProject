@@ -21,20 +21,7 @@ public class SignupPage extends AppCompatActivity {
     // Importing Classes
     DatabaseHelper databaseHelper;
 
-    // Buttons
-    Button signButton = findViewById(R.id.signUpButton);
 
-
-    // Edit textview
-    EditText emailBox = findViewById(R.id.editTextEmailAddress);
-    EditText passwordBox = findViewById(R.id.editTextPassword);
-    EditText confirmBox = findViewById(R.id.editTextTextPasswordConfirm);
-
-    // Error messages
-    TextView errorEmail = findViewById(R.id.tvErrorEmail);
-    TextView errorPassword = findViewById(R.id.tvErrorPassword);
-    TextView errorConfirm = findViewById(R.id.tvErrorConfirmPassword);
-    TextView relocateLogin = findViewById(R.id.LoginTextButton);
 
     // Main
     @Override
@@ -45,6 +32,21 @@ public class SignupPage extends AppCompatActivity {
 
         // Making intense for Database Helper
         databaseHelper = new DatabaseHelper(this);
+
+        // Buttons
+        Button signButton = findViewById(R.id.signUpButton);
+
+
+        // Edit textview
+        EditText emailBox = findViewById(R.id.editTextEmailAddress);
+        EditText passwordBox = findViewById(R.id.editTextPassword);
+        EditText confirmBox = findViewById(R.id.editTextTextPasswordConfirm);
+
+        // Error messages
+        TextView errorEmail = findViewById(R.id.tvErrorEmail);
+        TextView errorPassword = findViewById(R.id.tvErrorPassword);
+        TextView errorConfirm = findViewById(R.id.tvErrorConfirmPassword);
+        TextView relocateLogin = findViewById(R.id.LoginTextButton);
 
         // Listen to the button to clicked
         signButton.setOnClickListener(new View.OnClickListener() {
@@ -70,14 +72,13 @@ public class SignupPage extends AppCompatActivity {
                 for (int i = 0; i < email.length(); i++) {
                     if (email.charAt(i) == characterAt) {
                         numberOfAt++;
-
                     }
                     if (email.charAt(i) == characterDot) {
                         numberOfDot++;
                     }
                 }
-                Log.d("@", "" + numberOfAt);
-                Log.d(".", "" + numberOfDot);
+                Log.d("At", "" + numberOfAt);
+                Log.d("Dot", "" + numberOfDot);
 
                 // Email Check
                 // If the Edit Text Box it left blank, show error
@@ -85,7 +86,7 @@ public class SignupPage extends AppCompatActivity {
                     errorEmail.setText("* Please enter your email address");
                 }
                 // If email doesn't contain @ and . show invalid format error
-                else if (numberOfAt != 1 && numberOfDot != 0) {
+                else if (numberOfAt != 1 && numberOfDot != 1) {
                     errorEmail.setText("* Invalid email format");
                 }
                 // If email already exists in database, show error
@@ -95,7 +96,7 @@ public class SignupPage extends AppCompatActivity {
                 // IF email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
-                    if (numberOfAt == 1 && numberOfDot == 0) {
+                    if (numberOfAt == 1 && numberOfDot == 1) {
                         emailValid = true;
                         Log.d("email Valid", "T");
                     }
@@ -109,7 +110,7 @@ public class SignupPage extends AppCompatActivity {
                 }
                 // If password length is shorter than 8 show error
                 else if (passwordLen < 8) {
-                    errorPassword.setText("* Password must be longer than 8 Characters");
+                    errorPassword.setText("* Password is too short");
                 }
                 // Otherwise set password Valid
                 else {
@@ -165,6 +166,7 @@ public class SignupPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }
 
