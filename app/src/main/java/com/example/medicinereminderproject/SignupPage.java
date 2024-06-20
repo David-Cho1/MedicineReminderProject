@@ -77,6 +77,7 @@ public class SignupPage extends AppCompatActivity {
                         numberOfDot++;
                     }
                 }
+                Log.d("Email", "" + email);
                 Log.d("At", "" + numberOfAt);
                 Log.d("Dot", "" + numberOfDot);
 
@@ -86,7 +87,7 @@ public class SignupPage extends AppCompatActivity {
                     errorEmail.setText("* Please enter your email address");
                 }
                 // If email doesn't contain @ and . show invalid format error
-                else if (numberOfAt != 1 && numberOfDot != 1) {
+                else if (numberOfAt != 1 && numberOfDot < 1) {
                     errorEmail.setText("* Invalid email format");
                 }
                 // If email already exists in database, show error
@@ -96,9 +97,12 @@ public class SignupPage extends AppCompatActivity {
                 // IF email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
-                    if (numberOfAt == 1 && numberOfDot == 1) {
+                    if (numberOfAt == 1 && numberOfDot > 1) {
                         emailValid = true;
-                        Log.d("email Valid", "T");
+                        Log.d("Email Exist", "" + checkEmailExist);
+                    }
+                    else {
+                        Log.d("Email Exist", "" + checkEmailExist);
                     }
                 }
 
@@ -139,6 +143,10 @@ public class SignupPage extends AppCompatActivity {
                 if (confirmValid == true) {
                     errorConfirm.setText("");
                 }
+                Log.d("Email Valid", "True");
+                Log.d("Email Check", "" + checkEmailExist);
+
+
 
                 // If they are all valid, insert the data to the database
                 if (emailValid == true && passwordValid == true && confirmValid == true) {
@@ -147,15 +155,18 @@ public class SignupPage extends AppCompatActivity {
                     if (checkUserEmail == false) {
                         Boolean insert = databaseHelper.insertData(email, password);
 
+                        // If inserted successfully, show the toast and send to login page
                         if (insert == true) {
                             Toast.makeText(SignupPage.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                             startActivity(intent);
                         }
+                        // If Insert failed, show signup failed
                         else {
                             Toast.makeText(SignupPage.this, "Signup Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    // If checkUserEmail == false, show User already exist
                     else {
                         Toast.makeText(SignupPage.this, "User Already Exist, Please Login", Toast.LENGTH_SHORT).show();
                     }
@@ -165,6 +176,7 @@ public class SignupPage extends AppCompatActivity {
             }
         });
 
+        // Button send to login page
         relocateLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
