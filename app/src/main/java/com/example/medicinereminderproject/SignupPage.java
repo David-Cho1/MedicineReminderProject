@@ -142,16 +142,22 @@ public class SignupPage extends AppCompatActivity {
 
                 // If they are all valid, insert the data to the database
                 if (emailValid == true && passwordValid == true && confirmValid == true) {
-                    Boolean insert = databaseHelper.insertData(email, password);
+                    Boolean checkUserEmail = databaseHelper.checkEmail((email));
 
-                    if (insert == true) {
-                        Toast.makeText(SignupPage.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-                        startActivity(intent);
+                    if (checkUserEmail == false) {
+                        Boolean insert = databaseHelper.insertData(email, password);
+
+                        if (insert == true) {
+                            Toast.makeText(SignupPage.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(SignupPage.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else {
-                        Toast.makeText(SignupPage.this, "Signup Failed", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(SignupPage.this, "User Already Exist, Please Login", Toast.LENGTH_SHORT).show();
                     }
                 }
 
