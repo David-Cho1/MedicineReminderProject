@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordConfirm" />
 
         <TextView
-            android:id="@+id/noAccountText"
+            android:id="@+id/yesAccountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -130,8 +130,8 @@
             android:textColor="#FF4545"
             app:layout_constraintEnd_toEndOf="@+id/tvErrorConfirmPassword"
             app:layout_constraintHorizontal_bias="0.16"
-            app:layout_constraintStart_toEndOf="@+id/noAccountText"
-            app:layout_constraintTop_toTopOf="@+id/noAccountText" />
+            app:layout_constraintStart_toEndOf="@+id/yesAccountText"
+            app:layout_constraintTop_toTopOf="@+id/yesAccountText" />
 
         <TextView
             android:id="@+id/tvErrorEmail"

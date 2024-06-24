@@ -26,6 +26,7 @@ public class SignupPage extends AppCompatActivity {
     // Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // onCreate GUI
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signup);
@@ -35,7 +36,6 @@ public class SignupPage extends AppCompatActivity {
 
         // Buttons
         Button signButton = findViewById(R.id.signUpButton);
-
 
         // Edit textview
         EditText emailBox = findViewById(R.id.editTextEmailAddress);
@@ -54,10 +54,12 @@ public class SignupPage extends AppCompatActivity {
             // When the Signup button is clicked
             @Override
             public void onClick(View v) {
+                // Get the text to string from editTextView
                 String email = emailBox.getText().toString();
                 String password = passwordBox.getText().toString();
                 String confirmPasword = confirmBox.getText().toString();
 
+                // Setting up the variables
                 char characterAt = '@';
                 char characterDot = '.';
                 int numberOfDot = 0;
@@ -77,11 +79,6 @@ public class SignupPage extends AppCompatActivity {
                         numberOfDot++;
                     }
                 }
-                Log.d("Email", "" + email);
-                Log.d("At", "" + numberOfAt);
-                Log.d("Dot", "" + numberOfDot);
-                Log.d("Check Email 1", "" + checkEmailExist);
-
 
                 // Email Check
                 // If the Edit Text Box it left blank, show error
@@ -95,21 +92,17 @@ public class SignupPage extends AppCompatActivity {
                 // If email already exists in database, show error
                 else if (checkEmailExist == true) {
                     errorEmail.setText("* Email already Exist");
-                    Log.d("Check Email 2", "" + checkEmailExist);
-
                 }
                 // IF email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
                     if (numberOfAt == 1 && numberOfDot > 1) {
                         emailValid = true;
-                        Log.d("Email If", "" + checkEmailExist);
                     }
                     else {
-                        Log.d("Email Else", "" + checkEmailExist);
+                        emailValid = false;
                     }
                 }
-
 
                 // Password Check
                 // If Password is left blank show error
@@ -147,8 +140,6 @@ public class SignupPage extends AppCompatActivity {
                 if (confirmValid == true) {
                     errorConfirm.setText("");
                 }
-                Log.d("Email Valid", "" + emailValid);
-                Log.d("Email Check", "" + checkEmailExist);
 
 
 

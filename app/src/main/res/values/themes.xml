@@ -4,6 +4,9 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+    <style name="statusbar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
     <style name="Theme.MedicineReminderProject" parent="Base.Theme.MedicineReminderProject" />
 </resources>

@@ -22,7 +22,7 @@ public class LoginPage extends AppCompatActivity {
     }
     private void setInit() {
         // Listen to the Text View and when it's clicked, send to the SignUp Page
-        TextView sendSignUpbtn = (TextView)findViewById(R.id.signUpText);
+        TextView sendSignUpbtn = (TextView)findViewById(R.id.SignUpTextButton);
         sendSignUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
