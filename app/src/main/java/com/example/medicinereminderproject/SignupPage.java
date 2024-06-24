@@ -80,6 +80,8 @@ public class SignupPage extends AppCompatActivity {
                 Log.d("Email", "" + email);
                 Log.d("At", "" + numberOfAt);
                 Log.d("Dot", "" + numberOfDot);
+                Log.d("Check Email 1", "" + checkEmailExist);
+
 
                 // Email Check
                 // If the Edit Text Box it left blank, show error
@@ -93,16 +95,18 @@ public class SignupPage extends AppCompatActivity {
                 // If email already exists in database, show error
                 else if (checkEmailExist == true) {
                     errorEmail.setText("* Email already Exist");
+                    Log.d("Check Email 2", "" + checkEmailExist);
+
                 }
                 // IF email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
                     if (numberOfAt == 1 && numberOfDot > 1) {
                         emailValid = true;
-                        Log.d("Email Exist", "" + checkEmailExist);
+                        Log.d("Email If", "" + checkEmailExist);
                     }
                     else {
-                        Log.d("Email Exist", "" + checkEmailExist);
+                        Log.d("Email Else", "" + checkEmailExist);
                     }
                 }
 
@@ -114,7 +118,7 @@ public class SignupPage extends AppCompatActivity {
                 }
                 // If password length is shorter than 8 show error
                 else if (passwordLen < 8) {
-                    errorPassword.setText("* Password is too short");
+                    errorPassword.setText("* Password must be longer than 8");
                 }
                 // Otherwise set password Valid
                 else {
@@ -143,7 +147,7 @@ public class SignupPage extends AppCompatActivity {
                 if (confirmValid == true) {
                     errorConfirm.setText("");
                 }
-                Log.d("Email Valid", "True");
+                Log.d("Email Valid", "" + emailValid);
                 Log.d("Email Check", "" + checkEmailExist);
 
 
