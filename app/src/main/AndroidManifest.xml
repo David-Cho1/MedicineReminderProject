@@ -19,6 +19,9 @@
             android:name=".AlarmSetPage"
             android:exported="false" />
         <activity
+            android:name=".MainPage"
+            android:exported="false" />
+        <activity
             android:name=".SignupPage"
             android:exported="true">
             <intent-filter>

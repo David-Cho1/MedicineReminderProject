@@ -3,10 +3,12 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
@@ -70,19 +72,22 @@ public class LoginPage extends AppCompatActivity {
 
                 if (emailValid == true && passwordValid == true) {
                     Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
+
+                    if (checkCredentials == true) {
+                        Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        errorEmail.setText("* Invalid Email Address");
+                        errorPassword.setText("* Incorrect Password");
+                    }
                 }
 
+
             }
         });
 
-        // Listen to the Text View and when it's clicked, send to the SignUp Page
-        TextView sendSignUpbtn = (TextView)findViewById(R.id.SignUpTextButton);
-        sendSignUpbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this, SignupPage.class));
-            }
-        });
     }
 }
 

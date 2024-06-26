@@ -96,7 +96,7 @@ public class SignupPage extends AppCompatActivity {
                 // IF email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
-                    if (numberOfAt == 1 && numberOfDot > 1) {
+                    if (numberOfAt == 1 && numberOfDot >= 1) {
                         emailValid = true;
                     }
                     else {
