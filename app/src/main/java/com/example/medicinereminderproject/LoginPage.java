@@ -58,6 +58,7 @@ public class LoginPage extends AppCompatActivity {
                 }
                 // Otherwise set email Valid
                 else {
+                    errorEmail.setText("");
                     emailValid = true;
                 }
 
@@ -67,6 +68,7 @@ public class LoginPage extends AppCompatActivity {
                 }
                 // Otherwise set password Valid
                 else {
+                    errorPassword.setText("");
                     passwordValid = true;
                 }
 
