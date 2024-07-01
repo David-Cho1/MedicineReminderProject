@@ -13,16 +13,22 @@
         android:theme="@style/Theme.MedicineReminderProject"
         tools:targetApi="31">
         <activity
+            android:name=".DiaryPage"
+            android:exported="false" />
+        <activity
+            android:name=".AlarmPage"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
             android:name=".AlarmSetPage"
             android:exported="false" />
         <activity
-            android:name=".MainPage"
+            android:name=".LoginPage"
             android:exported="false" />
         <activity
-            android:name=".SignupPage"
+            android:name=".MainPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
