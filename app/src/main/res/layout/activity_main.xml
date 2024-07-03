@@ -54,13 +54,13 @@
 
         <TextView
             android:id="@+id/idTVHeading"
-            android:layout_width="173dp"
+            android:layout_width="248dp"
             android:layout_height="47dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Medicine Alarm"
+            android:text="Medicine Reminder"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
