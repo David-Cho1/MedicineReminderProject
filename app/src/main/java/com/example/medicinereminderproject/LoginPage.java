@@ -35,6 +35,7 @@ public class LoginPage extends AppCompatActivity {
 
         // Buttons
         Button loginButton = findViewById(R.id.loginButton);
+        TextView relocateSign = findViewById(R.id.SignUpTextButton);
 
         // Edit textview
         EditText emailBox = findViewById(R.id.editTextEmailAddress);
@@ -87,6 +88,15 @@ public class LoginPage extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        // Button send to signup page
+        relocateSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignupPage.class);
+                startActivity(intent);
             }
         });
 
