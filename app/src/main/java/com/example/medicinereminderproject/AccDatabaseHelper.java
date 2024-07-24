@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class AccDatabaseHelper extends SQLiteOpenHelper {
 
 
     public static final String databaseName = "Signup.db";
 
-    public DatabaseHelper(@Nullable Context context) {
+    public AccDatabaseHelper(@Nullable Context context) {
         super(context, "Signup.db", null, 1);
     }
     @Override
@@ -65,4 +65,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
     }
+
 }

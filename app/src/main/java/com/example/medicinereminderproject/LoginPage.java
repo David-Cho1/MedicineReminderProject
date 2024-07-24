@@ -3,7 +3,6 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginPage extends AppCompatActivity {
 
     // Importing Classes
-    DatabaseHelper databaseHelper;
+    AccDatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class LoginPage extends AppCompatActivity {
     // Main Function
     private void setInit() {
         // Making intense for Database Helper
-        databaseHelper = new DatabaseHelper(this);
+        databaseHelper = new AccDatabaseHelper(this);
 
         // Buttons
         Button loginButton = findViewById(R.id.loginButton);
@@ -55,7 +54,7 @@ public class LoginPage extends AppCompatActivity {
 
                 // If the email is left blank, show error
                 if (email.isEmpty()) {
-                    errorEmail.setText("* Please enter your email address");
+                    errorEmail.setText("* Please enter email address");
                 }
                 // Otherwise set email Valid
                 else {

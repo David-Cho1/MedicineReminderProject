@@ -16,6 +16,11 @@ public class AlarmPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alarm);
 
+        setInit();
+
+    }
+
+    private void setInit() {
 
     }
 }
