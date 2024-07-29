@@ -33,7 +33,7 @@ public class LoginPage extends AppCompatActivity {
         databaseHelper = new AccDatabaseHelper(this);
 
         // Buttons
-        Button loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.editButton);
         TextView relocateSign = findViewById(R.id.SignUpTextButton);
 
         // Edit textview
