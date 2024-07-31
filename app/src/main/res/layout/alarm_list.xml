@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="88dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="37dp"
+            android:text="00:00"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/satText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="S"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toStartOf="@+id/timeText"
+            app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
+        <TextView
+            android:id="@+id/monText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="M"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/satText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/tueText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="T"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/monText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/wedText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="W"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/tueText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/thuText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="T"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/wedText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/friText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="F"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/thuText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/sunText"
+            android:layout_width="13dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="S"
+            android:textAlignment="center"
+            android:textColor="#858585"
+            app:layout_constraintStart_toEndOf="@+id/friText"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicine Name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.808"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

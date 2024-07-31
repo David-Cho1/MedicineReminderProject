@@ -18,7 +18,7 @@
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="#104cb4"
+            android:background="#F6D0F2"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
