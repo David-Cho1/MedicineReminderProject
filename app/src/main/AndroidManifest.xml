@@ -22,13 +22,13 @@
             android:name=".SignupPage"
             android:exported="false" />
         <activity
-            android:name=".AlarmSetPage"
+            android:name=".LoginPage"
             android:exported="false" />
         <activity
             android:name=".MainPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".AlarmSetPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

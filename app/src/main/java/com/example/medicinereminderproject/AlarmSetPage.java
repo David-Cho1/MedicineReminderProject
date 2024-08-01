@@ -5,10 +5,14 @@ package com.example.medicinereminderproject;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 
@@ -20,6 +24,17 @@ public class AlarmSetPage extends AppCompatActivity {
     // Creating Variable
     private Button pickTimeBtn;
     private TextView selectedTimeTV;
+    private CheckBox sundayBox;
+    private CheckBox monddayBox;
+    private CheckBox tuesdayBox;
+    private CheckBox wednesdayBox;
+    private CheckBox thursdayBox;
+    private CheckBox fridayBox;
+    private CheckBox saturdayBox;
+    private TextView sunday;
+
+    CheckBox[] checkBoxes;
+    Integer items;
 
 
     // Function that opens the TimePickup page
@@ -31,10 +46,24 @@ public class AlarmSetPage extends AppCompatActivity {
         // Putting the buttons and text from the XML file into a variables
         pickTimeBtn = findViewById(R.id.idBtnPickTime);
         selectedTimeTV = findViewById(R.id.idTVSelectedTime);
+        // Check Box
+        sundayBox = findViewById(R.id.sundayselection);
+        monddayBox = findViewById(R.id.mondayselection);
+        tuesdayBox = findViewById(R.id.tuesdayselection);
+        wednesdayBox = findViewById(R.id.wednesdayselection);
+        thursdayBox = findViewById(R.id.thursdayselection);
+        fridayBox = findViewById(R.id.fridayselection);
+        saturdayBox = findViewById(R.id.saturdayselection);
+        sunday = findViewById(R.id.sundaytext);
+
+//        public void
+//        boolean isChecked =
+
+
+
 
         // Listen when the button is clicked
         pickTimeBtn.setOnClickListener(new View.OnClickListener() {
-
             // Function that fixes glitch where it preceding 0
             public String checkDigit(int number) {
                 // if the number is smaller than 9 then add "0" at the front
@@ -61,7 +90,14 @@ public class AlarmSetPage extends AppCompatActivity {
                         }, hour, minute, false);
                 timePickerDialog.show();
             }
+
         });
+
+
+
+
+
     }
+
 }
 
