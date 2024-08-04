@@ -24,7 +24,7 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDatabase) {
-        MyDatabase.execSQL("create Table alarmuser(id INTEGER PRIMARY KEY AUTOINCREMENT,user TEXT primary key, time TIME, repeat TEXT, med TEXT, writeDate TEXT NOT NULL)");
+        MyDatabase.execSQL("create Table alarmuser(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT primary key, time TEXT, repeat TEXT, med TEXT, writeDate TEXT NOT NULL)");
     }
 
     @Override
@@ -73,13 +73,14 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean insertAlarm(String user, String time, String repeat, String med) {
+    public Boolean insertAlarm(String user, String time, String repeat, String med, String writeDate) {
         SQLiteDatabase MyDatabase =  this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("user", user);
         contentValues.put("time", time);
         contentValues.put("repeat", repeat);
         contentValues.put("med", med);
+        contentValues.put("writeDate", writeDate);
         long result = MyDatabase.insert("alarmuser", null, contentValues);
 
         if (result == -1) {

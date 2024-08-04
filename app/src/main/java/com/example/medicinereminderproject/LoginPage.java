@@ -3,6 +3,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class LoginPage extends AppCompatActivity {
+
 
     // Importing Classes
     AccDatabaseHelper databaseHelper;
@@ -78,6 +80,7 @@ public class LoginPage extends AppCompatActivity {
                     if (checkCredentials == true) {
                         Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                        intent.putExtra("keyemail", email);
                         startActivity(intent);
                     }
                     else {

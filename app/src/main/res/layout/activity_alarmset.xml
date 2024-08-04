@@ -31,7 +31,7 @@
         android:layout_marginTop="236dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Enter Medicine Name"
+        android:hint="Enter Medicine Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

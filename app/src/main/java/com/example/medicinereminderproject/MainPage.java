@@ -3,6 +3,7 @@ package com.example.medicinereminderproject;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,9 +22,12 @@ public class MainPage extends AppCompatActivity {
         ImageButton alarmButton = findViewById(R.id.alarmButton);
         ImageButton diaryButton = findViewById(R.id.diaryButton);
 
+        String email = getIntent().getStringExtra("keyemail");
+
         alarmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AlarmPage.class);
+                intent.putExtra("keyemail", email);
                 startActivity(intent);
             }
         });
@@ -32,6 +36,7 @@ public class MainPage extends AppCompatActivity {
         diaryButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
+                intent.putExtra("keyemail", email);
                 startActivity(intent);
             }
         });

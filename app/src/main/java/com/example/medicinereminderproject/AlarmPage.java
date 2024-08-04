@@ -27,9 +27,7 @@ public class AlarmPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alarm);
-
         setInit();
-
     }
 
     private void setInit() {
@@ -38,6 +36,8 @@ public class AlarmPage extends AppCompatActivity {
         rv_alarm = findViewById(R.id.alarmsRv);
         btn_write = findViewById(R.id.optionFB);
         alarmItems = new ArrayList<>();
+
+        String email = getIntent().getStringExtra("keyemail");
 
         // Detect button clicks
         btn_write.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +62,7 @@ public class AlarmPage extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.dismiss();
                         Intent intent = new Intent(getApplicationContext(), AlarmSetPage.class);
+                        intent.putExtra("keyemail", email);
                         startActivity(intent);
                     }
                 });
