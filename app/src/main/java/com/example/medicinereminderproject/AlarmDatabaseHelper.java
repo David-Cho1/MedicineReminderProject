@@ -24,7 +24,7 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDatabase) {
-        MyDatabase.execSQL("create Table alarmuser(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT primary key, time TEXT, repeat TEXT, med TEXT, writeDate TEXT NOT NULL)");
+        MyDatabase.execSQL("create Table alarmuser(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, time TEXT, repeat TEXT, med TEXT, writeDate TEXT NOT NULL)");
     }
 
     @Override

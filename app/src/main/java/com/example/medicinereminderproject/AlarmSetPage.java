@@ -182,10 +182,6 @@ public class AlarmSetPage extends AppCompatActivity {
 
             }
         });
-
-
-
-
     }
 
     public void Check() {
@@ -211,7 +207,6 @@ public class AlarmSetPage extends AppCompatActivity {
 
         if (saturdayBox.isChecked())
             dayList.add("sat");
-
     }
 }
 
