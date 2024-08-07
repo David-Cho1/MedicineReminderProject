@@ -74,13 +74,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/alarmsRv"
-        android:layout_width="369dp"
-        android:layout_height="404dp"
+        android:layout_width="381dp"
+        android:layout_height="490dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alarmHeading"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.08"
+        tools:listitem="@layout/alarm_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

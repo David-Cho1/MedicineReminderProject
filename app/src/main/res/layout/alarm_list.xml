@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/timeText"
@@ -48,7 +51,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/satText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/satText" />
 
         <TextView
             android:id="@+id/tueText"
@@ -59,7 +62,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/monText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/monText" />
 
         <TextView
             android:id="@+id/wedText"
@@ -70,7 +73,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/tueText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/tueText" />
 
         <TextView
             android:id="@+id/thuText"
@@ -81,7 +84,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/wedText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/wedText" />
 
         <TextView
             android:id="@+id/friText"
@@ -92,7 +95,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/thuText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/thuText" />
 
         <TextView
             android:id="@+id/sunText"
@@ -103,7 +106,7 @@
             android:textAlignment="center"
             android:textColor="#858585"
             app:layout_constraintStart_toEndOf="@+id/friText"
-            tools:layout_editor_absoluteY="83dp" />
+            app:layout_constraintTop_toTopOf="@+id/friText" />
 
         <TextView
             android:id="@+id/medicineName"

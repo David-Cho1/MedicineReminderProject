@@ -1,13 +1,17 @@
 package com.example.medicinereminderproject;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,12 +34,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private Boolean thursday = false;
     private Boolean friday = false;
     private Boolean saturday = false;
-    private ArrayList dayList;
+    private ArrayList<String> dayList = new ArrayList<>();
     private String writeDate;
 
 
 
-    public CustomAdapter(ArrayList<AlarmItem> alarmItems, Context mContext, AlarmDatabaseHelper alarmDatabaseHelper) {
+    public CustomAdapter(ArrayList<AlarmItem> alarmItems, Context mContext) {
         this.alarmItems = alarmItems;
         this.mContext = mContext;
         alarmDatabaseHelper = new AlarmDatabaseHelper(mContext);
@@ -61,32 +65,33 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         checkDates(getDayList);
         // Change colour for selected day
         if (sunday) {
-            holder.tv_sunText.setTextColor(R.color.red);
+            Log.d("Sunday", "True");
+            holder.tv_sunText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("sun");
         }
         if (monday) {
-            holder.tv_monText.setTextColor(R.color.red);
+            holder.tv_monText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("mon");
 
         }
         if (tuesday) {
-            holder.tv_tueText.setTextColor(R.color.red);
+            holder.tv_tueText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("tue");
         }
         if (wednesday) {
-            holder.tv_wedText.setTextColor(R.color.red);
+            holder.tv_wedText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("wed");
         }
         if (thursday) {
-            holder.tv_thuText.setTextColor(R.color.red);
+            holder.tv_thuText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("thu");
         }
         if (friday) {
-            holder.tv_friText.setTextColor(R.color.red);
+            holder.tv_friText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("fri");
         }
         if (saturday) {
-            holder.tv_satText.setTextColor(R.color.red);
+            holder.tv_satText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("sat");
         }
 
@@ -130,6 +135,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         private TextView tv_thuText;
         private TextView tv_friText;
         private TextView tv_sunText;
+        private String med;
 
 
 
@@ -160,16 +166,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
                     String[] StrChoiceItems = {"Delete"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Choose an option");
+                    builder.setTitle("Would You like to delete this alarm?");
                     builder.setItems(StrChoiceItems, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int position) {
                             if(position == 0) {
+                                // Get email from Login Page
+                                LoginPage getUser = new LoginPage();
+                                String email = getUser.user;
+
+                                med = alarmItems.get(position).getMed();
+
+
                                 // Delete
-                                writeDate = alarmDatabaseHelper.selectAlarm()
+                                alarmItems.remove(curPos);
+                                notifyItemRemoved(curPos);
                                 String dayString = dayList.toString();
                                 String repeatDay = dayString.replaceAll("\\[","").replaceAll("\\]","");
-                                alarmDatabaseHelper.deleteAlarm(user, textTime, repeatDay, );
+                                alarmDatabaseHelper.deleteAlarm(email, textTime, repeatDay, med);
+                                Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -177,5 +192,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 }
             });
         }
+
+
+    }
+    // Function called from activity, receive new contents and add into this adapter
+    public void addItem(AlarmItem _item) {
+        alarmItems.add(0, _item);
+        notifyItemInserted(0);
     }
 }

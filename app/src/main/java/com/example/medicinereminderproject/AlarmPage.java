@@ -23,6 +23,7 @@ public class AlarmPage extends AppCompatActivity {
     private ArrayList<AlarmItem> alarmItems;
     private AlarmDatabaseHelper alarmDB;
     private String email;
+    private CustomAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +40,12 @@ public class AlarmPage extends AppCompatActivity {
         rv_alarm = findViewById(R.id.alarmsRv);
         btn_write = findViewById(R.id.optionFB);
         alarmItems = new ArrayList<>();
-
         email = getIntent().getStringExtra("keyemail");
 
+        // Load database
+        loadRecentDB();
+        rv_alarm.setNestedScrollingEnabled(false);
+        rv_alarm.smoothScrollToPosition(0);
 
 
         // Detect button clicks
@@ -74,5 +78,15 @@ public class AlarmPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void loadRecentDB() {
+        // Load saved data from database
+        alarmItems = alarmDB.getAlarmList();
+        if(mAdapter == null) {
+            mAdapter = new CustomAdapter(alarmItems, this);
+            rv_alarm.setHasFixedSize(true);
+            rv_alarm.setAdapter(mAdapter);
+        }
     }
 }
