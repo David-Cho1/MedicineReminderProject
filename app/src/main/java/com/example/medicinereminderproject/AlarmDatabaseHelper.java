@@ -63,7 +63,7 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
     }
     public Boolean selectAlarm(String user, String time, String repeat, String med) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser where user = ? and time = ? and repeat = ? and med = ? and writeDate = ?", new String[]{user, time, repeat, med});
+        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser where user = ? and time = ? and repeat = ? and med = ?", new String[]{user, time, repeat, med});
 
         if (cursor.getCount() > 0) {
             return true;

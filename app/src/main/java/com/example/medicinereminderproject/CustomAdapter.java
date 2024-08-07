@@ -1,7 +1,9 @@
 package com.example.medicinereminderproject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private Boolean thursday = false;
     private Boolean friday = false;
     private Boolean saturday = false;
+    private ArrayList dayList;
+    private String writeDate;
+
 
 
     public CustomAdapter(ArrayList<AlarmItem> alarmItems, Context mContext, AlarmDatabaseHelper alarmDatabaseHelper) {
@@ -57,24 +62,32 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // Change colour for selected day
         if (sunday) {
             holder.tv_sunText.setTextColor(R.color.red);
+            dayList.add("sun");
         }
         if (monday) {
             holder.tv_monText.setTextColor(R.color.red);
+            dayList.add("mon");
+
         }
         if (tuesday) {
             holder.tv_tueText.setTextColor(R.color.red);
+            dayList.add("tue");
         }
         if (wednesday) {
             holder.tv_wedText.setTextColor(R.color.red);
+            dayList.add("wed");
         }
         if (thursday) {
             holder.tv_thuText.setTextColor(R.color.red);
+            dayList.add("thu");
         }
         if (friday) {
             holder.tv_friText.setTextColor(R.color.red);
+            dayList.add("fri");
         }
         if (saturday) {
             holder.tv_satText.setTextColor(R.color.red);
+            dayList.add("sat");
         }
 
     }
@@ -123,6 +136,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
+
             tv_name = itemView.findViewById(R.id.medicineName);
             tv_time = itemView.findViewById(R.id.timeText);
             tv_satText = itemView.findViewById(R.id.satText);
@@ -133,11 +148,32 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             tv_friText = itemView.findViewById(R.id.friText);
             tv_sunText = itemView.findViewById(R.id.sunText);
 
+            String textTime = tv_time.getText().toString();
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int curPos = getAdapterPosition(); // Get Clicked Item list position
                     AlarmItem alarmItem = alarmItems.get(curPos);
+
+
+
+                    String[] StrChoiceItems = {"Delete"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Choose an option");
+                    builder.setItems(StrChoiceItems, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int position) {
+                            if(position == 0) {
+                                // Delete
+                                writeDate = alarmDatabaseHelper.selectAlarm()
+                                String dayString = dayList.toString();
+                                String repeatDay = dayString.replaceAll("\\[","").replaceAll("\\]","");
+                                alarmDatabaseHelper.deleteAlarm(user, textTime, repeatDay, );
+                            }
+                        }
+                    });
+                    builder.show();
                 }
             });
         }

@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginPage extends AppCompatActivity {
 
-
+    public String user;
     // Importing Classes
     AccDatabaseHelper databaseHelper;
 
@@ -81,6 +81,7 @@ public class LoginPage extends AppCompatActivity {
                         Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", email);
+                        user = email;
                         startActivity(intent);
                     }
                     else {

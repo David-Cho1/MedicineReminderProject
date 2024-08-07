@@ -22,6 +22,7 @@ public class AlarmPage extends AppCompatActivity {
     private FloatingActionButton btn_write;
     private ArrayList<AlarmItem> alarmItems;
     private AlarmDatabaseHelper alarmDB;
+    private String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,8 @@ public class AlarmPage extends AppCompatActivity {
         setInit();
     }
 
+
+
     private void setInit() {
         // Setting a variables name
         alarmDB = new AlarmDatabaseHelper(this);
@@ -37,7 +40,9 @@ public class AlarmPage extends AppCompatActivity {
         btn_write = findViewById(R.id.optionFB);
         alarmItems = new ArrayList<>();
 
-        String email = getIntent().getStringExtra("keyemail");
+        email = getIntent().getStringExtra("keyemail");
+
+
 
         // Detect button clicks
         btn_write.setOnClickListener(new View.OnClickListener() {
