@@ -61,6 +61,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.tv_time.setText(alarmItems.get(position).getTime());
         // See what days are selected, and turn the text red whatever is selected
         getDayList = alarmItems.get(position).getRepeat();
+
+        dayList.clear(); // reset arraylist
+
         // run a check list
         checkDates(getDayList);
         // Change colour for selected day
@@ -175,14 +178,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                                 LoginPage getUser = new LoginPage();
                                 String email = getUser.user;
 
-                                med = alarmItems.get(position).getMed();
+                                Log.d("email user", "" + email);
 
+                                med = alarmItems.get(position).getMed();
 
                                 // Delete
                                 alarmItems.remove(curPos);
                                 notifyItemRemoved(curPos);
                                 String dayString = dayList.toString();
                                 String repeatDay = dayString.replaceAll("\\[","").replaceAll("\\]","");
+                                Log.d("Delete Data", email + " " + textTime + " " + repeatDay + " " + med);
                                 alarmDatabaseHelper.deleteAlarm(email, textTime, repeatDay, med);
                                 Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
                             }
