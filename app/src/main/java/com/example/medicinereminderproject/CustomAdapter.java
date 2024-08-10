@@ -1,7 +1,6 @@
 package com.example.medicinereminderproject;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,13 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 // Connection for Recycler View
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
-
     private ArrayList<AlarmItem> alarmItems;
     private Context mContext;
     private AlarmDatabaseHelper alarmDatabaseHelper;
@@ -36,14 +32,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private Boolean saturday = false;
     private ArrayList<String> dayList = new ArrayList<>();
     private String writeDate;
+    private String mEmail;
+    private LoginPage login;
 
 
 
-    public CustomAdapter(ArrayList<AlarmItem> alarmItems, Context mContext) {
+    public CustomAdapter(ArrayList<AlarmItem> alarmItems, Context mContext, String mEmail) {
         this.alarmItems = alarmItems;
         this.mContext = mContext;
+        this.mEmail = mEmail;
         alarmDatabaseHelper = new AlarmDatabaseHelper(mContext);
     }
+
 
     @NonNull
     @Override
@@ -61,6 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.tv_time.setText(alarmItems.get(position).getTime());
         // See what days are selected, and turn the text red whatever is selected
         getDayList = alarmItems.get(position).getRepeat();
+        Log.d("get day list", "" + getDayList);
 
         dayList.clear(); // reset arraylist
 
@@ -71,31 +72,42 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             Log.d("Sunday", "True");
             holder.tv_sunText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("sun");
+            sunday = false;
         }
         if (monday) {
             holder.tv_monText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("mon");
-
+            monday = false;
         }
         if (tuesday) {
             holder.tv_tueText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("tue");
+            tuesday = false;
+
         }
         if (wednesday) {
             holder.tv_wedText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("wed");
+            wednesday = false;
+
         }
         if (thursday) {
             holder.tv_thuText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("thu");
+            thursday = false;
+
         }
         if (friday) {
             holder.tv_friText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("fri");
+            friday = false;
+
         }
         if (saturday) {
             holder.tv_satText.setTextColor(Color.parseColor("#EB4034"));
             dayList.add("sat");
+            saturday = false;
+
         }
 
     }
@@ -106,6 +118,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     public void checkDates(String days) {
+        Log.d("Check Dates", "" + days);
         if (days.contains("sun")) {
             sunday = true;
         }
@@ -139,6 +152,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         private TextView tv_friText;
         private TextView tv_sunText;
         private String med;
+        private String dayRepeat;
 
 
 
@@ -157,14 +171,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             tv_friText = itemView.findViewById(R.id.friText);
             tv_sunText = itemView.findViewById(R.id.sunText);
 
-            String textTime = tv_time.getText().toString();
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int curPos = getAdapterPosition(); // Get Clicked Item list position
                     AlarmItem alarmItem = alarmItems.get(curPos);
-
 
 
                     String[] StrChoiceItems = {"Delete"};
@@ -174,22 +187,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                         @Override
                         public void onClick(DialogInterface dialogInterface, int position) {
                             if(position == 0) {
-                                // Get email from Login Page
-                                LoginPage getUser = new LoginPage();
-                                String email = getUser.user;
+                                Log.d("email user", "" + mEmail);
 
-                                Log.d("email user", "" + email);
-
+                                // Get the Variable from the selected block
                                 med = alarmItems.get(position).getMed();
+                                dayRepeat = alarmItems.get(position).getRepeat();
+                                String textTime = tv_time.getText().toString();
+
+
 
                                 // Delete
                                 alarmItems.remove(curPos);
                                 notifyItemRemoved(curPos);
                                 String dayString = dayList.toString();
-                                String repeatDay = dayString.replaceAll("\\[","").replaceAll("\\]","");
-                                Log.d("Delete Data", email + " " + textTime + " " + repeatDay + " " + med);
-                                alarmDatabaseHelper.deleteAlarm(email, textTime, repeatDay, med);
-                                Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
+                                String repeatDay = dayString.replaceAll("\\[", "").replaceAll("\\]", "");
+
+                                Boolean alarmDeleted = alarmDatabaseHelper.deleteAlarm(mEmail, textTime, dayRepeat, med);
+                                if (alarmDeleted) {
+                                    Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
+
+                                }
                             }
                         }
                     });

@@ -84,7 +84,7 @@ public class AlarmPage extends AppCompatActivity {
         // Load saved data from database
         alarmItems = alarmDB.getAlarmList();
         if(mAdapter == null) {
-            mAdapter = new CustomAdapter(alarmItems, this);
+            mAdapter = new CustomAdapter(alarmItems, this, email);
             rv_alarm.setHasFixedSize(true);
             rv_alarm.setAdapter(mAdapter);
         }

@@ -80,8 +80,10 @@ public class LoginPage extends AppCompatActivity {
 
                     if (checkCredentials == true) {
                         Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", email);
+
 
                         user = email;
                         Log.d("user", "" + user);
