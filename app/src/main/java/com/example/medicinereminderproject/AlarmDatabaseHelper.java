@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -61,6 +62,8 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
 
         return alarmItems;
     }
+
+
     public Boolean selectAlarm(String user, String time, String repeat, String med) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser where user = ? and time = ? and repeat = ? and med = ?", new String[]{user, time, repeat, med});
