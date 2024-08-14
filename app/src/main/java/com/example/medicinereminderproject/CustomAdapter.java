@@ -203,10 +203,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                                 String repeatDay = dayString.replaceAll("\\[", "").replaceAll("\\]", "");
 
                                 Boolean alarmDeleted = alarmDatabaseHelper.deleteAlarm(mEmail, textTime, dayRepeat, med);
-                                if (alarmDeleted) {
-                                    Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
 
-                                }
                             }
                         }
                     });
