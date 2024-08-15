@@ -169,7 +169,7 @@ public class AlarmSetPage extends AppCompatActivity {
 
                     if (insert) {
                         Toast.makeText(AlarmSetPage.this, "Alarm Added", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), AlarmPage.class);
+                        Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", email);
                         startActivity(intent);
                     }

@@ -3,6 +3,7 @@ package com.example.medicinereminderproject;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -34,12 +35,11 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
         MyDatabase.execSQL("drop Table if exists alarmuser");
     }
 
-    public int curCount() {
-        SQLiteDatabase MyDatabase = getReadableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser order by writeDate DESC", null);
-        curCount = cursor.getCount();
-
-        return curCount();
+    public long getProfilesCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, "alarmuser");
+        db.close();
+        return count;
     }
 
     public ArrayList<AlarmItem> getAlarmList() {
