@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class AlarmDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String databaseName = "Signup.db";
+    public int curCount = 0;
 
     public AlarmDatabaseHelper(@Nullable Context context) {
         super(context, "Alarm.db", null, 1);
@@ -31,6 +32,14 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase MyDatabase, int oldVersion, int newVersion) {
         MyDatabase.execSQL("drop Table if exists alarmuser");
+    }
+
+    public int curCount() {
+        SQLiteDatabase MyDatabase = getReadableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser order by writeDate DESC", null);
+        curCount = cursor.getCount();
+
+        return curCount();
     }
 
     public ArrayList<AlarmItem> getAlarmList() {

@@ -34,9 +34,10 @@ public class MainPage extends AppCompatActivity {
     private ArrayList<AlarmItem> alarmSetList;
 
     private AlarmManager alarmManager;
-    private AlarmDatabaseHelper mDBHelper;
+    private AlarmDatabaseHelper alarmDB;
     private ArrayList<AlarmItem> alarmItems;
     private String alarmString;
+    private int mCurCount;
 
 
     @Override
@@ -47,16 +48,21 @@ public class MainPage extends AppCompatActivity {
         setContentView(binding.getRoot());
         createNotificationChannel();
 
+        // Giving crash when database commands are used
+
+        alarmDB = new AlarmDatabaseHelper(this); // Intense for DBHelper
 
         // Get alarm lists from database
-        mDBHelper = new AlarmDatabaseHelper(this);
 
-        alarmItems = mDBHelper.getAlarmList();
+        mCurCount = alarmDB.curCount();
+        alarmItems = alarmDB.getAlarmList();
+
         // get the time for 2nd database
         String time = alarmItems.get(1).getTime();
 
-        Log.d("alarm Set", "" + time);
+        Log.d("alarm Set", "" + mCurCount);
 
+        // PERMISSION CHECK
         // Checking the Version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             // Check if permission is enabled or not
@@ -84,10 +90,12 @@ public class MainPage extends AppCompatActivity {
 
 
         diaryButton.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
-                intent.putExtra("keyemail", email);
-                startActivity(intent);
+
+//                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
+//                intent.putExtra("keyemail", email);
+//                startActivity(intent);
             }
         });
     }
