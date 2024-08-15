@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import com.example.medicinereminderproject.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -65,12 +66,13 @@ public class MainPage extends AppCompatActivity {
             String repeatInDB = alarmItems.get(i).getRepeat();
             String timeInDB = alarmItems.get(i).getTime();
 
-
             String alarmStrings = ("<" + nameInDB + "> " + "<" + repeatInDB + "> " + "<" + timeInDB + ">");
             alarmSetList.add(alarmStrings);
 
             Log.d("Printing AAA", "" + alarmSetList);
             setAlarm(this ,nameInDB, timeInDB, repeatInDB);
+            Log.d("Printing DayList", "" + alarmSetList);
+
         }
 
 
@@ -134,13 +136,16 @@ public class MainPage extends AppCompatActivity {
 
         // 반복 요일 설정
         int[] daysOfWeek = parseRepeatDays(repeatDays);
+        Log.d("Days of Week", "" + Arrays.toString(daysOfWeek));
+
 
         // 알람 설정
-        for (int day : daysOfWeek) {
+            for (int day : daysOfWeek) {
             Calendar alarmCalendar = (Calendar) calendar.clone();
             alarmCalendar.set(Calendar.DAY_OF_WEEK, day);
+            Log.d("Calendar Print", "" + alarmCalendar.getTime());
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
         }
@@ -152,25 +157,25 @@ public class MainPage extends AppCompatActivity {
         List<Integer> dayList = new ArrayList<>();
         for (String day : days) {
             switch (day.trim()) {
-                case "Mon":
+                case "mon":
                     dayList.add(Calendar.MONDAY);
                     break;
-                case "Tue":
+                case "tue":
                     dayList.add(Calendar.TUESDAY);
                     break;
-                case "Wed":
+                case "wed":
                     dayList.add(Calendar.WEDNESDAY);
                     break;
-                case "Thu":
+                case "thu":
                     dayList.add(Calendar.THURSDAY);
                     break;
-                case "Fri":
+                case "fri":
                     dayList.add(Calendar.FRIDAY);
                     break;
-                case "Sat":
+                case "sat":
                     dayList.add(Calendar.SATURDAY);
                     break;
-                case "Sun":
+                case "sun":
                     dayList.add(Calendar.SUNDAY);
                     break;
             }
@@ -178,8 +183,9 @@ public class MainPage extends AppCompatActivity {
         int[] dayArray = new int[dayList.size()];
         for (int i = 0; i < dayList.size(); i++) {
             dayArray[i] = dayList.get(i);
+            Log.d("Day List", "" + dayArray[i]);
+
         }
-        Log.d("Day List", "" + dayList);
         return dayArray;
     }
 
