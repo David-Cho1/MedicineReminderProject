@@ -48,6 +48,8 @@ public class MainPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        checkPermission();
         createNotificationChannel();
 
         // Connect to Database Helper
@@ -75,22 +77,6 @@ public class MainPage extends AppCompatActivity {
 
         }
 
-
-
-
-        // PERMISSION CHECK
-        // Checking the Version
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            // Check if permission is enabled or not
-            if (ContextCompat.checkSelfPermission(this,
-                    android.Manifest.permission.POST_NOTIFICATIONS) !=
-                    PackageManager.PERMISSION_GRANTED) {
-                // If Permission is NOT Granted Ask for permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            }
-        }
-
         ImageButton alarmButton = findViewById(R.id.alarmButton);
         ImageButton diaryButton = findViewById(R.id.diaryButton);
 
@@ -109,14 +95,27 @@ public class MainPage extends AppCompatActivity {
 
             public void onClick(View view) {
 
-//                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
-//                intent.putExtra("keyemail", email);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
+                intent.putExtra("keyemail", email);
+                startActivity(intent);
             }
         });
     }
-
-
+    // Checking Push Notification Permission, if not granted, ask for Push Notification permission.
+    public void checkPermission() {
+        // PERMISSION CHECK
+        // Checking the Version
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Check if permission is enabled or not
+            if (ContextCompat.checkSelfPermission(this,
+                    android.Manifest.permission.POST_NOTIFICATIONS) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                // If Permission is NOT Granted Ask for permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+    }
     public void setAlarm(Context context, String title, String time, String repeatDays) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
@@ -145,7 +144,7 @@ public class MainPage extends AppCompatActivity {
             alarmCalendar.set(Calendar.DAY_OF_WEEK, day);
             Log.d("Calendar Print", "" + alarmCalendar.getTime());
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
         }
