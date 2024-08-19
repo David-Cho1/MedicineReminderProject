@@ -66,6 +66,7 @@ public class MainPage extends AppCompatActivity {
 
         String email = getIntent().getStringExtra("keyemail");
 
+        // Open up Alarm Page when Button clicked
         alarmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AlarmPage.class);
@@ -74,7 +75,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
-
+        // Open up Diary Page when Button clicked
         diaryButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {

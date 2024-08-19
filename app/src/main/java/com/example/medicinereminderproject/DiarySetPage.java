@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,9 @@ public class DiarySetPage extends AppCompatActivity {
     private int dateLength = 0;
     private Boolean titleAccept = true;
     private Boolean dateAccept = true;
+    private TextView errorTitleTV;
+
+    private TextView errorDateTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class DiarySetPage extends AppCompatActivity {
         dateET = findViewById(R.id.dateEditText);
         contentET = findViewById(R.id.contentET);
         saveBtn = findViewById(R.id.savebutton);
+        errorTitleTV = findViewById(R.id.errorTitleText);
+        errorDateTV = findViewById(R.id.errorDateText);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +72,8 @@ public class DiarySetPage extends AppCompatActivity {
 
                 // Show Toast Message
                 if (titleLength > 18) {
+                    errorTitleTV.setText("* Title is too long");
+
                     Toast.makeText(DiarySetPage.this, "Title is too long", Toast.LENGTH_SHORT).show();
                     titleAccept = false; // set title not acceptable
                 }
@@ -86,7 +94,8 @@ public class DiarySetPage extends AppCompatActivity {
                 }
 
                 if (numberOfSlash != 2) {
-                    Toast.makeText(DiarySetPage.this, "Incorrect Date Format", Toast.LENGTH_SHORT).show();
+
+                    errorDateTV.setText("* Incorrect \n Date Format");
                     dateAccept = false;
                 }
                 else {
