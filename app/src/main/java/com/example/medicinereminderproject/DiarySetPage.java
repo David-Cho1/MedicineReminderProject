@@ -2,6 +2,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,11 @@ public class DiarySetPage extends AppCompatActivity {
     private EditText titleET;
     private EditText dateET;
     private EditText contentET;
+    private int titleLength = 0;
+    private int dateLength = 0;
+    private Boolean titleAccept = true;
+    private Boolean dateAccept = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,28 +50,66 @@ public class DiarySetPage extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Variables that will be used in this function
+                char characterSlash = '/';
+                int numberOfSlash = 0;
+
                 // Get values from Edit Text
                 title = titleET.getText().toString();
                 diarydate = dateET.getText().toString();
                 contents = contentET.getText().toString();
 
-                // Simple date formatter
-                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                String writeDate = date.format(Calendar.getInstance().getTime());
+                // If the title Length is too long
+                titleLength = title.length();
+                dateLength = diarydate.length();
 
-                Boolean insert = diaryDB.insertDiary(user, title, contents, diarydate, writeDate);
-                if (insert) {
-                    Toast.makeText(DiarySetPage.this, "Diary Added", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                    intent.putExtra("keyemail", user);
-                    startActivity(intent);
+                // Show Toast Message
+                if (titleLength > 18) {
+                    Toast.makeText(DiarySetPage.this, "Title is too long", Toast.LENGTH_SHORT).show();
+                    titleAccept = false; // set title not acceptable
+                }
+                // If title length is shorter than 18 characters,
+                else if (titleLength < 18) {
+                    titleAccept = true; // set title acceptable
+                }
+                // If title is left empty
+                if (titleLength == 0) {
+                    titleAccept = false; // set title not acceptable
                 }
 
+                // If the Email doesn't have the right format
+                for (int i = 0; i < dateLength; i++) {
+                    if (diarydate.charAt(i) == characterSlash) {
+                        numberOfSlash++;
+                    }
+                }
+
+                if (numberOfSlash != 2) {
+                    Toast.makeText(DiarySetPage.this, "Incorrect Date Format", Toast.LENGTH_SHORT).show();
+                    dateAccept = false;
+                }
+                else {
+                    dateAccept = true;
+                }
+
+
+                // Simple date formatter
+                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                // get current time into "date" form
+                String writeDate = date.format(Calendar.getInstance().getTime());
+
+                // If title length is acceptable, insert diary data to database
+                if (titleAccept && dateAccept) {
+                    Boolean insert = diaryDB.insertDiary(user, title, contents, diarydate, writeDate);
+                    if (insert) {
+                        Toast.makeText(DiarySetPage.this, "Diary Added", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                        intent.putExtra("keyemail", user);
+                        startActivity(intent);
+                    }
+                }
             }
         });
-
-
-
     }
 }
