@@ -5,6 +5,15 @@ public class DiaryItem {
     private String user;
     private String title;
     private String context;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public DiaryItem() {
 

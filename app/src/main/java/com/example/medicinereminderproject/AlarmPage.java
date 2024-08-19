@@ -73,7 +73,6 @@ public class AlarmPage extends AppCompatActivity {
 
                 // Buttons in Dialog
                 Button newBtn = dialog.findViewById(R.id.newButton);
-                Button deleteBtn = dialog.findViewById(R.id.deleteButton);
 
                 // Show Dialog
                 dialog.show();
@@ -93,29 +92,7 @@ public class AlarmPage extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(Intent.ACTION_POWER_CONNECTED);
-//        filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-//        // Local
-//        filter.addAction(MyReceiver.MyAction);
-//        registerReceiver(mReceiver, filter);
-//    }
-//    // Stop Receiver
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        unregisterReceiver(mReceiver);
-//    }
-//
-//    // Send an action to Broacast Receiver
-//    public void sendBroadCast(View view) {
-//        // Include Action and Sent intent to Receiver
-//        Intent intent = new Intent(MyReceiver.MyAction);
-//        sendBroadcast(intent);
-//    }
+
 
     private void loadRecentDB() {
         // Load saved data from database

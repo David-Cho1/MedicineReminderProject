@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/idTVHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Medicine Diary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="409dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:background="#F6D0F2"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="533dp" >
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </FrameLayout>
+
+
+
+
+    <Button
+        android:id="@+id/savebutton"
+        android:layout_width="283dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#104cb4"
+        android:text="Save"
+        android:textSize="16dp"
+        android:textColorLink="#673AB7"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#F6D0F2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="398dp"
+        android:layout_height="333dp"
+        app:layout_constraintBottom_toTopOf="@+id/savebutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTVHeading">
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:text="Date:"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toEndOf="@+id/titleTV"
+            app:layout_constraintTop_toTopOf="@+id/titleTV" />
+
+        <EditText
+            android:id="@+id/contentET"
+            android:layout_width="362dp"
+            android:layout_height="175dp"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            app:layout_constraintStart_toStartOf="@+id/contextTV"
+            app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:text="Title:"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="162dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Enter Title Here"
+            android:inputType="text"
+            android:text=""
+            app:layout_constraintStart_toStartOf="@+id/titleTV"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+
+        <EditText
+            android:id="@+id/dateEditText"
+            android:layout_width="162dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Enter Date Here"
+            android:inputType="text"
+            android:text=""
+            app:layout_constraintStart_toStartOf="@+id/titleTV"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+
+        <TextView
+            android:id="@+id/contextTV"
+            android:layout_width="87dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:text="Context:"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/titleEditText"
+            app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

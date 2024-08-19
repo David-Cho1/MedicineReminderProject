@@ -27,7 +27,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDatabase) {
-        MyDatabase.execSQL("create Table diarytable(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, title TEXT, context TEXT, writeDate TEXT NOT NULL)");
+        MyDatabase.execSQL("create Table diarytable(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, title TEXT, context TEXT, date TEXT, writeDate TEXT NOT NULL)");
     }
 
     @Override
@@ -54,6 +54,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                 String user = cursor.getString(cursor.getColumnIndexOrThrow("user"));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String context = cursor.getString(cursor.getColumnIndexOrThrow("context"));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 String writeDate = cursor.getString(cursor.getColumnIndexOrThrow("writeDate"));
 
                 DiaryItem diaryItem = new DiaryItem();
@@ -61,6 +62,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                 diaryItem.setUser(user);
                 diaryItem.setTitle(title);
                 diaryItem.setContext(context);
+                diaryItem.setDate(date);
                 diaryItem.setWriteDate(writeDate);
                 diaryItems.add(diaryItem);
             }
@@ -83,12 +85,13 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean insertDiary(String user, String title, String context, String writeDate) {
+    public Boolean insertDiary(String user, String title, String context, String date, String writeDate) {
         SQLiteDatabase MyDatabase =  this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("user", user);
-        contentValues.put("time", title);
-        contentValues.put("repeat", context);
+        contentValues.put("title", title);
+        contentValues.put("context", context);
+        contentValues.put("date", date);
         contentValues.put("writeDate", writeDate);
         long result = MyDatabase.insert("diarytable", null, contentValues);
 
@@ -103,7 +106,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
     public Boolean deleteDiary(String user, String title, String context) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("DELETE FROM diarytable WHERE user = ? and title = ? and context = ?", new String[]{user, title, context});
+        Cursor cursor = MyDatabase.rawQuery("DELETE FROM diarytable WHERE user = ? and title = ? and date = ?", new String[]{user, title, context});
 
         if (cursor.getCount() > 0) {
             return true;
@@ -114,4 +117,6 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
         }
     }
+
+
 }

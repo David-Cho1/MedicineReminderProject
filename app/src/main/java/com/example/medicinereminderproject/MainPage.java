@@ -59,23 +59,7 @@ public class MainPage extends AppCompatActivity {
         mCurCount = alarmDB.getProfilesCount();
         Log.d("mCurCount", "" + mCurCount);
 
-        // Get the alarm List from
-        alarmItems = alarmDB.getAlarmList();
-        alarmSetList = new ArrayList<>();
 
-        for (int i = 0; i < mCurCount; i++) {
-            String nameInDB = alarmItems.get(i).getMed();
-            String repeatInDB = alarmItems.get(i).getRepeat();
-            String timeInDB = alarmItems.get(i).getTime();
-
-            String alarmStrings = ("<" + nameInDB + "> " + "<" + repeatInDB + "> " + "<" + timeInDB + ">");
-            alarmSetList.add(alarmStrings);
-
-            Log.d("Printing AAA", "" + alarmSetList);
-            setAlarm(this ,nameInDB, timeInDB, repeatInDB);
-            Log.d("Printing DayList", "" + alarmSetList);
-
-        }
 
         ImageButton alarmButton = findViewById(R.id.alarmButton);
         ImageButton diaryButton = findViewById(R.id.diaryButton);
@@ -116,29 +100,31 @@ public class MainPage extends AppCompatActivity {
             }
         }
     }
+
+    // Set Alarm Function
     public void setAlarm(Context context, String title, String time, String repeatDays) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("title", title);
 
-        // 시간 파싱
+        // Time parsing
         String[] timeParts = time.split(":");
         int hour = Integer.parseInt(timeParts[0]);
         int minute = Integer.parseInt(timeParts[1]);
         Log.d("Time Set", hour + ":" + minute);
 
-        // 현재 시간
+        // Current Time
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
 
-        // 반복 요일 설정
+        // Set Repeat days
         int[] daysOfWeek = parseRepeatDays(repeatDays);
         Log.d("Days of Week", "" + Arrays.toString(daysOfWeek));
 
 
-        // 알람 설정
+        // Alarm Set
             for (int day : daysOfWeek) {
             Calendar alarmCalendar = (Calendar) calendar.clone();
             alarmCalendar.set(Calendar.DAY_OF_WEEK, day);
@@ -150,7 +136,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    // 반복 요일 문자열을 파싱하여 요일 번호 배열 반환
+    // parse repat days to number
     private int[] parseRepeatDays(String repeatDays) {
         String[] days = repeatDays.split(",");
         List<Integer> dayList = new ArrayList<>();
