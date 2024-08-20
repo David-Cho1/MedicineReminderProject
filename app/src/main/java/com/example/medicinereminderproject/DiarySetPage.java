@@ -72,17 +72,17 @@ public class DiarySetPage extends AppCompatActivity {
 
                 // Show Toast Message
                 if (titleLength > 18) {
-                    errorTitleTV.setText("* Title is too long");
-
-                    Toast.makeText(DiarySetPage.this, "Title is too long", Toast.LENGTH_SHORT).show();
+                    errorTitleTV.setText("* Title is too long"); // show error
                     titleAccept = false; // set title not acceptable
                 }
                 // If title length is shorter than 18 characters,
                 else if (titleLength < 18) {
                     titleAccept = true; // set title acceptable
+                    errorTitleTV.setText(""); // set Text to empty
                 }
                 // If title is left empty
                 if (titleLength == 0) {
+                    errorTitleTV.setText("* Please add a Title");   // show error
                     titleAccept = false; // set title not acceptable
                 }
 
@@ -94,12 +94,13 @@ public class DiarySetPage extends AppCompatActivity {
                 }
 
                 if (numberOfSlash != 2) {
-
                     errorDateTV.setText("* Incorrect \n Date Format");
                     dateAccept = false;
                 }
                 else {
                     dateAccept = true;
+                    errorDateTV.setText("");
+
                 }
 
 

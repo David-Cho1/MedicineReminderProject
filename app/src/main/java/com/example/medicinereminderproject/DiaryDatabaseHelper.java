@@ -42,6 +42,24 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public void UpdateDiary(String _title, String _content, String _date, int _id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE diarytable SET title='" + _title +"', context='" + _content +"', date='" + _date +"' where id= '" + _id + "'");
+    }
+    public String getContent(String user, String title, String date) {
+        String content = "";
+
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from diarytable where user = ? and title = ? and date = ?", new String[]{user, title, date});
+        if(cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                content = cursor.getString(cursor.getColumnIndexOrThrow("context"));
+            }
+        }
+        cursor.close();
+
+        return content;
+    }
     public ArrayList<DiaryItem> getDiaryList() {
         ArrayList<DiaryItem> diaryItems = new ArrayList<>();
 

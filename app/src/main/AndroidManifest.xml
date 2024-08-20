@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MedicineReminderProject"
         tools:targetApi="31">
         <activity
+            android:name=".DiaryViewPage"
+            android:exported="false" />
+        <activity
             android:name=".DiarySetPage"
             android:exported="false" />
         <activity

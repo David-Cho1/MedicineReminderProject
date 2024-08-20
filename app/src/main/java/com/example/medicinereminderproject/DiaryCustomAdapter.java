@@ -1,8 +1,11 @@
 package com.example.medicinereminderproject;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +59,7 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
         private TextView tv_date;
         private String title;
         private String date;
+        private DiaryViewPage viewPage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,13 +74,25 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
                     DiaryItem diaryItem = diaryItems.get(curPos);
 
 
-                    String[] StrChoiceItems = {"Delete"};
+                    String[] StrChoiceItems = {"View","Delete"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setTitle("Would You like to delete this Diary?");
                     builder.setItems(StrChoiceItems, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int position) {
                             if(position == 0) {
+                                title = diaryItems.get(position).getTitle();
+                                date = diaryItems.get(position).getDate();
+
+                                // Send to diary View Page
+                                Intent intent = new Intent(mContext, DiaryViewPage.class);
+                                intent.putExtra("keyemail", mUser);
+                                intent.putExtra("keytitle", title);
+                                intent.putExtra("keydate", date);
+
+                                mContext.startActivity(intent);
+                            }
+                            if(position == 1) {
                                 Log.d("email user", "" + mUser);
 
                                 // Get the Variable from the selected block
