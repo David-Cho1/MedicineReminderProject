@@ -42,7 +42,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public void UpdateDiary(String _title, String _content, String _date, int _id) {
+    public void updateDiary(String _title, String _content, String _date, int _id) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("UPDATE diarytable SET title='" + _title +"', context='" + _content +"', date='" + _date +"' where id= '" + _id + "'");
     }
@@ -59,6 +59,23 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return content;
+    }
+
+    public int getDiaryID(String user, String title, String date, String content) {
+        String strId = "";
+        int id = 0;
+
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from diarytable where user = ? and title = ? and date = ? and context = ?", new String[]{user, title, date, content});
+        if(cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                strId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
+                id = Integer.parseInt(strId);
+            }
+        }
+        cursor.close();
+
+        return id;
     }
     public ArrayList<DiaryItem> getDiaryList() {
         ArrayList<DiaryItem> diaryItems = new ArrayList<>();
@@ -122,17 +139,15 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Boolean deleteDiary(String user, String title, String context) {
+    public Boolean deleteDiary(String user, String title, String date) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("DELETE FROM diarytable WHERE user = ? and title = ? and date = ?", new String[]{user, title, context});
+        Cursor cursor = MyDatabase.rawQuery("DELETE FROM diarytable WHERE user = ? and title = ? and date = ?", new String[]{user, title, date});
 
         if (cursor.getCount() > 0) {
             return true;
         }
         else {
             return false;
-
-
         }
     }
 

@@ -190,8 +190,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                                 Log.d("email user", "" + mEmail);
 
                                 // Get the Variable from the selected block
-                                med = alarmItems.get(position).getMed();
-                                dayRepeat = alarmItems.get(position).getRepeat();
+                                med = alarmItems.get(curPos).getMed();
+                                dayRepeat = alarmItems.get(curPos).getRepeat();
                                 String textTime = tv_time.getText().toString();
 
 
