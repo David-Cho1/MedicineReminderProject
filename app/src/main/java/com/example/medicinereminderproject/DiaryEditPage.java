@@ -81,7 +81,6 @@ public class DiaryEditPage extends AppCompatActivity {
                 newDate = dateET.getText().toString();
                 newContent = contentET.getText().toString();
 
-
                 // If the title Length is too long
                 titleLength = newTitle.length();
                 dateLength = newDate.length();
@@ -119,7 +118,6 @@ public class DiaryEditPage extends AppCompatActivity {
                 else {
                     dateAccept = true;
                     errorDateTV.setText("");
-
                 }
 
                 // If title length is acceptable, update diary data to database
@@ -143,7 +141,10 @@ public class DiaryEditPage extends AppCompatActivity {
             // Discard changes and Send to Diary page
             @Override
             public void onClick(View v) {
-
+                // Send back to Main Page
+                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
+                intent.putExtra("keyemail", user);
+                startActivity(intent);
             }
         });
 
