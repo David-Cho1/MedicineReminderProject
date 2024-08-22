@@ -26,7 +26,6 @@ public class DiaryPage extends AppCompatActivity {
     private DiaryDatabaseHelper diaryDB;
     private DiaryCustomAdapter mAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +37,14 @@ public class DiaryPage extends AppCompatActivity {
 
     }
 
+    // Main Function
     public void setInit() {
         btn_write = findViewById(R.id.floatButtonDiary);
         rv_diary = findViewById(R.id.diaryRv);
         diaryDB = new DiaryDatabaseHelper(this);
         mDiaryItems = new ArrayList<>();
 
-
+        // Execute loadRecentDB() method
         loadRecentDB();
 
         // Detect button clicks
@@ -77,6 +77,7 @@ public class DiaryPage extends AppCompatActivity {
         });
     }
 
+    // Load Data from database to CustomAdapter
     private void loadRecentDB() {
         // Load saved data from database
         mDiaryItems = diaryDB.getDiaryList();
