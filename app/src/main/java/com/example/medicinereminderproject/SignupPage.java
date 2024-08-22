@@ -2,6 +2,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,7 +80,7 @@ public class SignupPage extends AppCompatActivity {
                 // Email Check
                 // If the Edit Text Box it left blank, show error
                 if (email.isEmpty()) {
-                    errorEmail.setText("* Please enter your email address");
+                    errorEmail.setText("* Enter your email address");
                 }
                 // If email doesn't contain @ and . show invalid format error
                 else if (numberOfAt != 1 && numberOfDot < 1) {
@@ -142,7 +143,7 @@ public class SignupPage extends AppCompatActivity {
                 // If they are all valid, insert the data to the database
                 if (emailValid == true && passwordValid == true && confirmValid == true) {
                     Boolean checkUserEmail = databaseHelper.checkEmail((email));
-
+                    Log.d("Sign up Validation", "Email: True \nPassword: True\nConfirm: True");
                     if (checkUserEmail == false) {
                         Boolean insert = databaseHelper.insertData(email, password);
 

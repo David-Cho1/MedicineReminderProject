@@ -57,6 +57,17 @@
 
 
         <TextView
+            android:id="@+id/tvErrorOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textColor="#FF0000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+
+        <TextView
             android:id="@+id/loginTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,17 +157,16 @@
             app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
             app:layout_constraintTop_toTopOf="@+id/noAccountText" />
 
+
         <TextView
             android:id="@+id/tvErrorEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:text=""
             android:textColor="#FF0000"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/editTextEmailAddress"
             app:layout_constraintTop_toTopOf="@+id/emailText" />
-
 
         <TextView
             android:id="@+id/tvErrorPassword"

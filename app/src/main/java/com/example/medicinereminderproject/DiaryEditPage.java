@@ -119,7 +119,6 @@ public class DiaryEditPage extends AppCompatActivity {
                 else {
                     dateAccept = true;
                     errorDateTV.setText("");
-
                 }
 
                 // If title length is acceptable, update diary data to database

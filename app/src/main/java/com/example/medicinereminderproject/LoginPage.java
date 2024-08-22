@@ -46,6 +46,7 @@ public class LoginPage extends AppCompatActivity {
         // Error messages
         TextView errorEmail = findViewById(R.id.tvErrorEmail);
         TextView errorPassword = findViewById(R.id.tvErrorPassword);
+        TextView errorOr = findViewById(R.id.tvErrorOr);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +79,7 @@ public class LoginPage extends AppCompatActivity {
                 if (emailValid == true && passwordValid == true) {
                     Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
 
+                    Log.d("Sign up Validation", "Email: True \nPassword: True\nConfirm: True");
                     if (checkCredentials == true) {
                         Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
 
@@ -91,6 +93,7 @@ public class LoginPage extends AppCompatActivity {
                     }
                     else {
                         errorEmail.setText("* Invalid Email Address");
+                        errorOr.setText("or");
                         errorPassword.setText("* Incorrect Password");
                     }
                 }
