@@ -2,7 +2,6 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +56,7 @@ public class SignupPage extends AppCompatActivity {
                 String confirmPasword = confirmBox.getText().toString();
 
                 // Setting up the variables
-                char characterAt = '@';
+                char characterAt = '@';     //
                 char characterDot = '.';
                 int numberOfDot = 0;
                 int numberOfAt = 0;
@@ -80,17 +79,20 @@ public class SignupPage extends AppCompatActivity {
                 // Email Check
                 // If the Edit Text Box it left blank, show error
                 if (email.isEmpty()) {
-                    errorEmail.setText("* Enter your email address");
+                    errorEmail.setText("* Please enter email address");
                 }
+
                 // If email doesn't contain @ and . show invalid format error
                 else if (numberOfAt != 1 && numberOfDot < 1) {
                     errorEmail.setText("* Invalid email format");
                 }
+
                 // If email already exists in database, show error
                 else if (checkEmailExist == true) {
                     errorEmail.setText("* Email already Exist");
                 }
-                // IF email doens't exist
+
+                // If email doens't exist
                 else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
                     if (numberOfAt == 1 && numberOfDot >= 1) {
@@ -123,6 +125,7 @@ public class SignupPage extends AppCompatActivity {
                 else if (!confirmPasword.equals(password)){
                     errorConfirm.setText("* Password doesn't match");
                 }
+                // Set password Confirm
                 else {
                     confirmValid = true;
                 }
@@ -131,6 +134,7 @@ public class SignupPage extends AppCompatActivity {
                 if (emailValid == true) {
                     errorEmail.setText("");
                 }
+                // If password is correct, set error message back to normal
                 if (passwordValid == true) {
                     errorPassword.setText("");
                 }
@@ -138,12 +142,11 @@ public class SignupPage extends AppCompatActivity {
                     errorConfirm.setText("");
                 }
 
-
-
                 // If they are all valid, insert the data to the database
                 if (emailValid == true && passwordValid == true && confirmValid == true) {
                     Boolean checkUserEmail = databaseHelper.checkEmail((email));
-                    Log.d("Sign up Validation", "Email: True \nPassword: True\nConfirm: True");
+
+                    // If email Already Exist
                     if (checkUserEmail == false) {
                         Boolean insert = databaseHelper.insertData(email, password);
 
@@ -172,6 +175,7 @@ public class SignupPage extends AppCompatActivity {
         relocateLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Open Login Page
                 Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                 startActivity(intent);
             }
