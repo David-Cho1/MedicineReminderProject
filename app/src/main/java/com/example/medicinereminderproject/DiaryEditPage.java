@@ -2,6 +2,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +64,9 @@ public class DiaryEditPage extends AppCompatActivity {
         errorTitleTV = findViewById(R.id.errorTitleText);
         errorDateTV = findViewById(R.id.errorDateText);
 
+        // Scroll Text View
+        contentET.setMovementMethod(new ScrollingMovementMethod());
+
         // Fill up the Text box with origianl Text
         titleET.setText(originalTitle);
         dateET.setText(originalDate);
@@ -118,6 +122,7 @@ public class DiaryEditPage extends AppCompatActivity {
                 else {
                     dateAccept = true;
                     errorDateTV.setText("");
+                    Log.d("dateAccept", "dateAccept: " + dateAccept);
                 }
 
                 // If title length is acceptable, update diary data to database

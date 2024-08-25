@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class AlarmDatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String databaseName = "Signup.db";
+    public static final String databaseName = "Alarm.db";
     public int curCount = 0;
 
     public AlarmDatabaseHelper(@Nullable Context context) {
@@ -42,11 +42,11 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public ArrayList<AlarmItem> getAlarmList() {
+    public ArrayList<AlarmItem> getAlarmList(String _user) {
         ArrayList<AlarmItem> alarmItems = new ArrayList<>();
 
         SQLiteDatabase MyDatabase = getReadableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser order by writeDate DESC", null);
+        Cursor cursor = MyDatabase.rawQuery("Select * from alarmuser where user = ? order by writeDate DESC", new String[]{_user});
         if (cursor.getCount() > 0) {
             // When Data exist, repeat and set the variables to the value in database
             while (cursor.moveToNext()) {

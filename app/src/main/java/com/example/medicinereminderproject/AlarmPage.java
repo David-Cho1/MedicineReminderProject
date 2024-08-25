@@ -96,7 +96,14 @@ public class AlarmPage extends AppCompatActivity {
 
     private void loadRecentDB() {
         // Load saved data from database
-        alarmItems = alarmDB.getAlarmList();
+        alarmItems = alarmDB.getAlarmList(email);
+        String alarmLists = alarmItems.toString();
+        int alarmNum = 0;
+        alarmNum = alarmItems.size();
+        for (int i = 0; i < alarmNum; i++) {
+            Log.d("alarm items at " + i, "" + alarmItems.get(i).getId() +" " +
+                    alarmItems.get(i).getTime()+" " + alarmItems.get(i).getMed()+" " + alarmItems.get(i).getRepeat());
+        }
         if(mAdapter == null) {
             mAdapter = new CustomAdapter(alarmItems, this, email);
             rv_alarm.setHasFixedSize(true);

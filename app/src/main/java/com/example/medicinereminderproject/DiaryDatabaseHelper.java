@@ -42,9 +42,18 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    public void updateDiary(String _title, String _content, String _date, int _id) {
+    public Boolean updateDiary(String _title, String _content, String _date, int _id) {
+        String intID = Integer.toString(_id);
+
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE diarytable SET title='" + _title +"', context='" + _content +"', date='" + _date +"' where id= '" + _id + "'");
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title", _title);
+        contentValues.put("context", _content);
+        contentValues.put("date", _date);
+
+        db.update("diarytable", contentValues, "id = ?", new String[] {intID});
+
+        return true;
     }
     public String getContent(String user, String title, String date) {
         String content = "";
@@ -77,11 +86,11 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
         return id;
     }
-    public ArrayList<DiaryItem> getDiaryList() {
+    public ArrayList<DiaryItem> getDiaryList(String _user) {
         ArrayList<DiaryItem> diaryItems = new ArrayList<>();
 
         SQLiteDatabase MyDatabase = getReadableDatabase();
-        Cursor cursor = MyDatabase.rawQuery("Select * from diarytable order by writeDate DESC", null);
+        Cursor cursor = MyDatabase.rawQuery("Select * from diarytable where user = ? order by writeDate DESC", new String[]{_user});
         if (cursor.getCount() > 0) {
             // When Data exist, repeat and set the variables to the value in database
             while (cursor.moveToNext()) {
@@ -150,6 +159,4 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-
-
 }

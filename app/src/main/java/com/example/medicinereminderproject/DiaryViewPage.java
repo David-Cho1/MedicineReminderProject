@@ -2,6 +2,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -46,6 +47,9 @@ public class DiaryViewPage extends AppCompatActivity {
         contentTV = findViewById(R.id.contentsTV);
         dateTV = findViewById(R.id.dateTV);
         closeBtn = findViewById(R.id.closebutton);
+
+        // Scroll Text View
+        contentTV.setMovementMethod(new ScrollingMovementMethod());
 
         // Fill up the Textview with the selected data details
         titleTV.setText(String.format("Title: %s", title));

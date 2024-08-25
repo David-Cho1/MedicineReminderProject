@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MedicineReminderProject"
         tools:targetApi="31">
         <activity
+            android:name=".LoginPage"
+            android:exported="false" />
+        <activity
             android:name=".DiaryEditPage"
             android:exported="false" />
         <activity
@@ -45,7 +48,7 @@
             android:name=".MainPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".SplashPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

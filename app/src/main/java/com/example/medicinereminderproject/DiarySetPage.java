@@ -2,6 +2,7 @@ package com.example.medicinereminderproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +53,9 @@ public class DiarySetPage extends AppCompatActivity {
         saveBtn = findViewById(R.id.savebutton);
         errorTitleTV = findViewById(R.id.errorTitleText);
         errorDateTV = findViewById(R.id.errorDateText);
+
+        // Scroll Text View
+        contentET.setMovementMethod(new ScrollingMovementMethod());
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

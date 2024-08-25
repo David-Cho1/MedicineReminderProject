@@ -75,8 +75,10 @@
         android:layout_height="333dp"
         app:layout_constraintBottom_toTopOf="@+id/savebutton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idTVHeading">
+        app:layout_constraintTop_toBottomOf="@+id/idTVHeading"
+        app:layout_constraintVertical_bias="0.424">
 
         <TextView
             android:id="@+id/dateTV"
@@ -95,11 +97,13 @@
             android:layout_height="175dp"
             android:layout_marginTop="36dp"
             android:ems="10"
+            android:fontFamily="sans-serif-light"
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:lines="8"
             android:maxLines="10"
             android:scrollbars="vertical"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="@+id/contextTV"
             app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 

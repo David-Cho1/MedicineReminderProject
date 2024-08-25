@@ -58,6 +58,7 @@ public class LoginPage extends AppCompatActivity {
 
                 // If the email is left blank, show error
                 if (email.isEmpty()) {
+                    errorOr.setText("");
                     errorEmail.setText("* Please enter email address");
                 }
                 // Otherwise set email Valid
@@ -68,6 +69,7 @@ public class LoginPage extends AppCompatActivity {
 
                 // If the password is left blank, show error
                 if (password.isEmpty()) {
+                    errorOr.setText("");
                     errorPassword.setText("* Please enter your password");
                 }
                 // Otherwise set password Valid
@@ -77,6 +79,7 @@ public class LoginPage extends AppCompatActivity {
                 }
 
                 if (emailValid == true && passwordValid == true) {
+                    errorOr.setText("");
                     Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
 
                     Log.d("Sign up Validation", "Email: True \nPassword: True\nConfirm: True");
@@ -108,7 +111,6 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignupPage.class);
                 startActivity(intent);
-
             }
         });
 

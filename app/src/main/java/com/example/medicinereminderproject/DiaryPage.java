@@ -80,7 +80,7 @@ public class DiaryPage extends AppCompatActivity {
     // Load Data from database to CustomAdapter
     private void loadRecentDB() {
         // Load saved data from database
-        mDiaryItems = diaryDB.getDiaryList();
+        mDiaryItems = diaryDB.getDiaryList(email);
         if (mAdapter == null) {
             mAdapter = new DiaryCustomAdapter(email, mDiaryItems, this);
             rv_diary.setHasFixedSize(true);

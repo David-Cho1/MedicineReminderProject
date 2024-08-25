@@ -99,6 +99,7 @@ public class SignupPage extends AppCompatActivity {
                         emailValid = true;
                     }
                     else {
+                        errorEmail.setText("* Invalid Email Format");
                         emailValid = false;
                     }
                 }

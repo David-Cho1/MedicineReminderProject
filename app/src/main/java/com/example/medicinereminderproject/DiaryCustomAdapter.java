@@ -96,6 +96,7 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
                                 title = diaryItems.get(curPos).getTitle();
                                 date = diaryItems.get(curPos).getDate();
 
+
                                 // Send to diary View Page
                                 Intent intent = new Intent(mContext, DiaryViewPage.class);
 
@@ -147,14 +148,11 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
 
                                 Boolean diaryDeleted = mDBHelper.deleteDiary(mUser, title, date);
 
+                                Log.d("diaryDelete Boolean", "" + diaryDeleted);
                                 // If deleted Successfully, show toast
-                                if (diaryDeleted) {
-                                    Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
-                                }
-                                // If not deleted, show error toast
-                                else {
-                                    Toast.makeText(mContext, "Something went Wrong", Toast.LENGTH_SHORT).show();
-                                }
+
+                                Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
+
 
                                 // Delete GUI
                                 diaryItems.remove(curPos);
