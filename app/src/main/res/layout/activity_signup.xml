@@ -128,10 +128,10 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/signUpButton"
             app:layout_constraintEnd_toEndOf="@+id/tvErrorConfirmPassword"
-            app:layout_constraintHorizontal_bias="0.402"
+            app:layout_constraintHorizontal_bias="0.57"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordConfirm"
-            app:layout_constraintVertical_bias="0.454" />
+            app:layout_constraintVertical_bias="0.288" />
 
         <TextView
             android:id="@+id/LoginTextButton"
@@ -141,10 +141,12 @@
             android:text="Login"
             android:textColor="#FF4545"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tvErrorConfirmPassword"
-            app:layout_constraintHorizontal_bias="0.16"
-            app:layout_constraintStart_toEndOf="@+id/yesAccountText"
-            app:layout_constraintTop_toTopOf="@+id/yesAccountText" />
+            app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yesAccountText"
+            app:layout_constraintVertical_bias="0.466" />
 
         <TextView
             android:id="@+id/tvErrorEmail"

@@ -133,13 +133,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
+
         <TextView
             android:id="@+id/noAccountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="20dp"
             android:text="Don't have an account?"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/editTextPassword"
@@ -149,14 +150,16 @@
             android:id="@+id/SignUpTextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="44dp"
+            android:layout_marginTop="12dp"
             android:clickable="true"
             android:text="Sign up"
             android:textColor="#FF4545"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-            app:layout_constraintTop_toTopOf="@+id/noAccountText" />
-
+            app:layout_constraintBottom_toTopOf="@+id/editButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noAccountText"
+            app:layout_constraintVertical_bias="0.083" />
 
         <TextView
             android:id="@+id/tvErrorEmail"
