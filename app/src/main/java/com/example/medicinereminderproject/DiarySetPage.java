@@ -34,7 +34,7 @@ public class DiarySetPage extends AppCompatActivity {
     private Boolean titleAccept = true;
     private Boolean dateAccept = true;
     private TextView errorTitleTV;
-
+    private Boolean febMaxDate;
     private TextView errorDateTV;
 
     @Override
@@ -64,11 +64,14 @@ public class DiarySetPage extends AppCompatActivity {
                 char characterSlash = '/';
                 int numberOfSlash = 0;
 
+
+
                 // Get values from Edit Text
                 title = titleET.getText().toString();
                 diarydate = dateET.getText().toString();
                 contents = contentET.getText().toString();
 
+                boolean validationDate = isValidDate(diarydate);
 
                 // If the title Length is too long
                 titleLength = title.length();
@@ -79,36 +82,37 @@ public class DiarySetPage extends AppCompatActivity {
                     errorTitleTV.setText("* Title is too long"); // show error
                     titleAccept = false; // set title not acceptable
                 }
+
                 // If title length is shorter than 18 characters,
                 else if (titleLength < 18) {
                     titleAccept = true; // set title acceptable
                     errorTitleTV.setText(""); // set Text to empty
                 }
+
                 // If title is left empty
                 if (titleLength == 0) {
                     errorTitleTV.setText("* Please add a Title");   // show error
                     titleAccept = false; // set title not acceptable
                 }
 
-                // If the Email doesn't have the right format
-                for (int i = 0; i < dateLength; i++) {
-                    if (diarydate.charAt(i) == characterSlash) {
-                        numberOfSlash++;
-                    }
-                    // Add right format for date
-
-                }
-
-                if (numberOfSlash != 2) {
-                    errorDateTV.setText("* Incorrect \n Date Format");
+                // If Date isn't valid set Date Accept false
+                if (validationDate == false) {
                     dateAccept = false;
+
+                    // If febMaxDate is false, show error
+                    if (febMaxDate == false) {
+                        errorDateTV.setText("* Date doesn't \n exist");
+                    }
+                    // Else show error
+                    else{
+                        errorDateTV.setText("* Incorrect \n Date Format");
+                    }
                 }
-                else {
+
+                else if (validationDate) {
                     dateAccept = true;
                     errorDateTV.setText("");
-
                 }
-
 
                 // Simple date formatter
                 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -125,6 +129,50 @@ public class DiarySetPage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
+            }
+
+            // Valid Date Checking
+            public boolean isValidDate(String date) {
+                febMaxDate = true;
+                // if date is not 8 characters
+                if (date.length() != 8) {
+                    return false;
+                }
+
+                // Try splitting the date and put them into Integer value
+                try {
+                    // Parse split date into integer
+                    int day = Integer.parseInt(date.substring(0, 2));
+                    int month = Integer.parseInt(date.substring(3, 5));
+                    int year = Integer.parseInt(date.substring(6, 8));
+
+                    // If '/' isn't at 3rd or 5th, return false
+                    if (date.charAt(2) != '/' || date.charAt(5) != '/') {
+                        return false;
+                    }
+
+                    // If day is not in between 1 - 31 or month is not in between 1 - 12, return false
+                    if (day < 1 || day > 31 || month < 1 || month > 12) {
+                        return false;
+                    }
+
+                    // If month is February, return false
+                    if (month == 2) {
+                        // Check for leap year
+                        boolean isLeapYear = (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
+                        if (day > 29 || (day == 29 && !isLeapYear)) {
+                            febMaxDate = false;
+                            return false;
+                        }
+                    }
+                    // Return true
+                    return true;
+                }
+                // If input isn't in Integer value return false
+                catch (NumberFormatException e) {
+                    return false;
+                }
+
             }
         });
     }
