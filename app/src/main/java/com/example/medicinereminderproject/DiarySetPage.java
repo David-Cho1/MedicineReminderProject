@@ -95,6 +95,8 @@ public class DiarySetPage extends AppCompatActivity {
                     if (diarydate.charAt(i) == characterSlash) {
                         numberOfSlash++;
                     }
+                    // Add right format for date
+
                 }
 
                 if (numberOfSlash != 2) {

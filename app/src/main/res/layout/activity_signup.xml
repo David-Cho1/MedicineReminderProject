@@ -108,7 +108,7 @@
             android:layout_marginTop="160dp"
             android:backgroundTint="#104cb4"
             android:fontFamily="sans-serif"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="18sp"

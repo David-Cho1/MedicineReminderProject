@@ -131,20 +131,6 @@
             app:layout_constraintStart_toStartOf="@+id/titleTV"
             app:layout_constraintTop_toBottomOf="@+id/titleTV" />
 
-        <EditText
-            android:id="@+id/dateEditText"
-            android:layout_width="162dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="DD/MM/YY"
-            android:inputType="text"
-            android:text=""
-            android:textAlignment="textEnd"
-            app:layout_constraintStart_toStartOf="@+id/titleTV"
-            app:layout_constraintTop_toBottomOf="@+id/titleTV" />
-
         <TextView
             android:id="@+id/contextTV"
             android:layout_width="87dp"
@@ -174,6 +160,20 @@
             app:layout_constraintBottom_toBottomOf="@+id/dateTV"
             app:layout_constraintEnd_toEndOf="@+id/dateEditText"
             app:layout_constraintTop_toTopOf="@+id/dateTV" />
+
+        <EditText
+            android:id="@+id/dateEditText"
+            android:layout_width="162dp"
+            android:layout_height="42dp"
+            android:hint="DD/MM/YY"
+            android:textAlignment="textEnd"
+            android:ems="10"
+            android:inputType="date"
+            app:layout_constraintBottom_toBottomOf="@+id/titleEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/dateTV"
+            app:layout_constraintTop_toTopOf="@+id/titleEditText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
