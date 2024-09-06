@@ -49,7 +49,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     @Override
     public CustomAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Connecting from here
-        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.alarm_list, parent, false);
+        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.alarm_list, parent,
+                                false);
         return new ViewHolder(holder);
     }
 
@@ -171,17 +172,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             tv_friText = itemView.findViewById(R.id.friText);
             tv_sunText = itemView.findViewById(R.id.sunText);
 
-
-
+            // When item view is clicked
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int curPos = getAdapterPosition(); // Get Clicked Item list position
                     AlarmItem alarmItem = alarmItems.get(curPos);
 
-
+                    // Delete option
                     String[] StrChoiceItems = {"Delete"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                    // Confirm user to delete alarm
                     builder.setTitle("Would You like to delete this alarm?");
                     builder.setItems(StrChoiceItems, new DialogInterface.OnClickListener() {
                         @Override
@@ -194,17 +196,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                                 dayRepeat = alarmItems.get(curPos).getRepeat();
                                 String textTime = tv_time.getText().toString();
 
-
-
                                 // Delete
                                 alarmItems.remove(curPos);
                                 notifyItemRemoved(curPos);
                                 String dayString = dayList.toString();
-                                String repeatDay = dayString.replaceAll("\\[", "").replaceAll("\\]", "");
+                                String repeatDay = dayString.replaceAll("\\[", "")
+                                                            .replaceAll("\\]", "");
 
-                                Boolean alarmDeleted = alarmDatabaseHelper.deleteAlarm(mEmail, textTime, dayRepeat, med);
-                                Toast.makeText(mContext, "Alarm Deleted", Toast.LENGTH_SHORT).show();
+                                // Delete alarm from database
+                                Boolean alarmDeleted = alarmDatabaseHelper.deleteAlarm(mEmail,
+                                                                                        textTime,
+                                                                                        dayRepeat,
+                                                                                        med);
 
+                                // Show Toast message
+                                Toast.makeText(mContext, "Alarm Deleted",
+                                                Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -212,9 +219,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 }
             });
         }
-
-
     }
+
     // Function called from activity, receive new contents and add into this adapter
     public void addItem(AlarmItem _item) {
         alarmItems.add(0, _item);

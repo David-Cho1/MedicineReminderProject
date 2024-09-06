@@ -67,7 +67,7 @@ public class DiaryEditPage extends AppCompatActivity {
         // Scroll Text View
         contentET.setMovementMethod(new ScrollingMovementMethod());
 
-        // Fill up the Text box with origianl Text
+        // Fill up the Text box with original Text
         titleET.setText(originalTitle);
         dateET.setText(originalDate);
         contentET.setText(originalContent, TextView.BufferType.EDITABLE);
@@ -117,12 +117,9 @@ public class DiaryEditPage extends AppCompatActivity {
                     errorDateTV.setText("* Incorrect \n Date Format");
                     dateAccept = false;
 
-                }
-                // If it does, set dateAccept true and delete error message
-                else {
+                } else {
                     dateAccept = true;
                     errorDateTV.setText("");
-                    Log.d("dateAccept", "dateAccept: " + dateAccept);
                 }
 
                 // If title length is acceptable, update diary data to database
@@ -131,7 +128,8 @@ public class DiaryEditPage extends AppCompatActivity {
                     diaryDB.updateDiary(newTitle, newContent, newDate, diaryId);
 
                     // Show toast
-                    Toast.makeText(DiaryEditPage.this, "Diary Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DiaryEditPage.this, "Diary Updated",
+                                    Toast.LENGTH_SHORT).show();
 
                     // Send back to Main Page
                     Intent intent = new Intent(getApplicationContext(), MainPage.class);

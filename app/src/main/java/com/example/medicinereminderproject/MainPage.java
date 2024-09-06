@@ -34,13 +34,11 @@ public class MainPage extends AppCompatActivity {
     private ActivityMainBinding binding;
     private PendingIntent pendingIntent;
     private ArrayList<String> alarmSetList;
-
     private AlarmManager alarmManager;
     private AlarmDatabaseHelper alarmDB;
     private ArrayList<AlarmItem> alarmItems;
     private String alarmString;
     private long mCurCount;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +55,11 @@ public class MainPage extends AppCompatActivity {
 
         // Get how many row exist in db table
         mCurCount = alarmDB.getProfilesCount();
-        Log.d("mCurCount", "" + mCurCount);
-
-
 
         ImageButton alarmButton = findViewById(R.id.alarmButton);
         ImageButton diaryButton = findViewById(R.id.diaryButton);
 
+        // Email Address
         String email = getIntent().getStringExtra("keyemail");
 
         // Open up Alarm Page when Button clicked
@@ -77,7 +73,6 @@ public class MainPage extends AppCompatActivity {
 
         // Open up Diary Page when Button clicked
         diaryButton.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
@@ -86,6 +81,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
     }
+
     // Checking Push Notification Permission, if not granted, ask for Push Notification permission.
     public void checkPermission() {
         // PERMISSION CHECK
@@ -102,7 +98,7 @@ public class MainPage extends AppCompatActivity {
         }
     }
 
-    // Set Alarm Function
+    // Set Alarm Function (Not Working)
     public void setAlarm(Context context, String title, String time, String repeatDays) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
@@ -112,7 +108,6 @@ public class MainPage extends AppCompatActivity {
         String[] timeParts = time.split(":");
         int hour = Integer.parseInt(timeParts[0]);
         int minute = Integer.parseInt(timeParts[1]);
-        Log.d("Time Set", hour + ":" + minute);
 
         // Current Time
         Calendar calendar = Calendar.getInstance();
@@ -122,18 +117,18 @@ public class MainPage extends AppCompatActivity {
 
         // Set Repeat days
         int[] daysOfWeek = parseRepeatDays(repeatDays);
-        Log.d("Days of Week", "" + Arrays.toString(daysOfWeek));
-
 
         // Alarm Set
             for (int day : daysOfWeek) {
             Calendar alarmCalendar = (Calendar) calendar.clone();
             alarmCalendar.set(Calendar.DAY_OF_WEEK, day);
-            Log.d("Calendar Print", "" + alarmCalendar.getTime());
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
+                                                                     intent,
+                                                                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_DAY * 7, pendingIntent);
         }
     }
 
@@ -169,7 +164,6 @@ public class MainPage extends AppCompatActivity {
         int[] dayArray = new int[dayList.size()];
         for (int i = 0; i < dayList.size(); i++) {
             dayArray[i] = dayList.get(i);
-            Log.d("Day List", "" + dayArray[i]);
 
         }
         return dayArray;

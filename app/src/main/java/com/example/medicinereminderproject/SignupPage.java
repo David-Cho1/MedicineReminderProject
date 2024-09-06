@@ -11,13 +11,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class SignupPage extends AppCompatActivity {
-
     // Importing Classes
     AccDatabaseHelper databaseHelper;
-
-
 
     // Main
     @Override
@@ -46,7 +42,6 @@ public class SignupPage extends AppCompatActivity {
 
         // Listen to the button to clicked
         signButton.setOnClickListener(new View.OnClickListener() {
-
             // When the Signup button is clicked
             @Override
             public void onClick(View v) {
@@ -80,25 +75,17 @@ public class SignupPage extends AppCompatActivity {
                 // If the Edit Text Box it left blank, show error
                 if (email.isEmpty()) {
                     errorEmail.setText("* Please enter email address");
-                }
-
-                // If email doesn't contain @ and . show invalid format error
-                else if (numberOfAt != 1 && numberOfDot < 1) {
+                } else if (numberOfAt != 1 && numberOfDot < 1) {
+                    // If email doesn't contain @ and . show invalid format error
                     errorEmail.setText("* Invalid email format");
-                }
-
-                // If email already exists in database, show error
-                else if (checkEmailExist == true) {
+                } else if (checkEmailExist == true) {
+                    // If email already exists in database, show error
                     errorEmail.setText("* Email already Exist");
-                }
-
-                // If email doens't exist
-                else if (checkEmailExist == false) {
+                } else if (checkEmailExist == false) {
                     // If email does contain @ and . Set the email valid
                     if (numberOfAt == 1 && numberOfDot >= 1) {
                         emailValid = true;
-                    }
-                    else {
+                    } else {
                         errorEmail.setText("* Invalid Email Format");
                         emailValid = false;
                     }
@@ -122,12 +109,10 @@ public class SignupPage extends AppCompatActivity {
                 // If confirm is left blank show error
                 if (confirmPasword.isEmpty()) {
                     errorConfirm.setText("* Please confirm password");
-                }
-                else if (!confirmPasword.equals(password)){
+                } else if (!confirmPasword.equals(password)){
                     errorConfirm.setText("* Password doesn't match");
-                }
-                // Set password Confirm
-                else {
+                } else {
+                    // Set password Confirm
                     confirmValid = true;
                 }
 
@@ -135,10 +120,13 @@ public class SignupPage extends AppCompatActivity {
                 if (emailValid == true) {
                     errorEmail.setText("");
                 }
+
                 // If password is correct, set error message back to normal
                 if (passwordValid == true) {
                     errorPassword.setText("");
                 }
+
+                // If password is confirmed, set error message back to normal
                 if (confirmValid == true) {
                     errorConfirm.setText("");
                 }
@@ -153,22 +141,24 @@ public class SignupPage extends AppCompatActivity {
 
                         // If inserted successfully, show the toast and send to login page
                         if (insert == true) {
-                            Toast.makeText(SignupPage.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupPage.this, "Signup Successfully",
+                                            Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                             startActivity(intent);
                         }
                         // If Insert failed, show signup failed
                         else {
-                            Toast.makeText(SignupPage.this, "Signup Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupPage.this, "Signup Failed",
+                                            Toast.LENGTH_SHORT).show();
                         }
                     }
                     // If checkUserEmail == false, show User already exist
                     else {
-                        Toast.makeText(SignupPage.this, "User Already Exist, Please Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupPage.this,
+                                    "User Already Exist, Please Login",
+                                        Toast.LENGTH_SHORT).show();
                     }
                 }
-
-
             }
         });
 
@@ -181,7 +171,6 @@ public class SignupPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }
 

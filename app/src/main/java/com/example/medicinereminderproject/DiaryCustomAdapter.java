@@ -38,7 +38,8 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Connecting from here
-        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.diary_list, parent, false);
+        View holder = LayoutInflater.from(parent.getContext()).inflate(R.layout.diary_list,
+                                            parent, false);
         return new ViewHolder(holder);
     }
 
@@ -91,11 +92,15 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
                         @Override
                         public void onClick(DialogInterface dialogInterface, int position) {
                             // View Button Clicked
+                            /*
+                             * Position 0 = View Page
+                             * Position 1 = Edit Page
+                             * Position 2 = Delete
+                             */
                             if(position == 0) {
                                 Log.d("position clicked", "" + position);
                                 title = diaryItems.get(curPos).getTitle();
                                 date = diaryItems.get(curPos).getDate();
-
 
                                 // Send to diary View Page
                                 Intent intent = new Intent(mContext, DiaryViewPage.class);
@@ -107,18 +112,13 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
 
                                 // Start activity
                                 mContext.startActivity(intent);
-                            }
-
-                            // Edit Button Clicked
-                            else if(position == 1) {
+                            } else if(position == 1) {
                                 Log.d("email user", "" + mUser);
 
                                 // Get the Variable from the selected block
                                 title = diaryItems.get(curPos).getTitle();
                                 date = diaryItems.get(curPos).getDate();
                                 id = diaryItems.get(curPos).getId();
-
-                                Log.d("Log D diary", "" + title + "\n" + date +"\n" + id);
 
                                 // Change ID to string value to process putExtra()
                                 String strId = Integer.toString(id);
@@ -134,31 +134,22 @@ public class DiaryCustomAdapter extends RecyclerView.Adapter<DiaryCustomAdapter.
 
                                 // Start an Activity
                                 mContext.startActivity(intent);
-                            }
-
-                            // Delete Button Clicked
-                            else if(position == 2) {
-                                Log.d("email user", "" + mUser);
-
+                            } else if(position == 2) {
                                 // Get the Variable from the selected block
                                 title = diaryItems.get(curPos).getTitle();
                                 date = diaryItems.get(curPos).getDate();
 
-                                Log.d("Log D diary", "" + title + "\n" + date);
-
+                                // Diary Delete
                                 Boolean diaryDeleted = mDBHelper.deleteDiary(mUser, title, date);
 
-                                Log.d("diaryDelete Boolean", "" + diaryDeleted);
                                 // If deleted Successfully, show toast
-
-                                Toast.makeText(mContext, "Diary Deleted", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(mContext, "Diary Deleted",
+                                                Toast.LENGTH_SHORT).show();
 
                                 // Delete GUI
                                 diaryItems.remove(curPos);
                                 notifyItemRemoved(curPos);
                             }
-
                         }
                     });
                     // Show the builder

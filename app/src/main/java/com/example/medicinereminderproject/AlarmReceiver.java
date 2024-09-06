@@ -19,10 +19,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static final int PERMISSION_REQUEST_CODE = 1234;
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Alarm Receiver
         Intent i = new Intent(context, AlarmReminder.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_IMMUTABLE);
-
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i,
+                                                                PendingIntent.FLAG_IMMUTABLE);
+        // Notification Builder
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "AlarmChannel")
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("Medicine Reminder")
@@ -34,10 +36,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 
-
+        // Check the version of android and if it is bigger than TIRAMISU check permission.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.POST_NOTIFICATIONS}, PERMISSION_REQUEST_CODE);
+            // If permission is not on, request permission.
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+                                                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) context,
+                                                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                                                    PERMISSION_REQUEST_CODE);
             }
         }
         notificationManagerCompat.notify(123, builder.build());

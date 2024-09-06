@@ -15,10 +15,13 @@ public class DiaryItem {
         this.date = date;
     }
 
+    // Constructor
     public DiaryItem() {
 
     }
 
+    // Getter and Setter
+    // ID
     public int getId() {
         return id;
     }
@@ -27,6 +30,7 @@ public class DiaryItem {
         this.id = id;
     }
 
+    // User
     public String getUser() {
         return user;
     }
@@ -35,6 +39,7 @@ public class DiaryItem {
         this.user = user;
     }
 
+    // Title
     public String getTitle() {
         return title;
     }
@@ -43,6 +48,7 @@ public class DiaryItem {
         this.title = title;
     }
 
+    // Context
     public String getContext() {
         return context;
     }
@@ -51,6 +57,7 @@ public class DiaryItem {
         this.context = context;
     }
 
+    // Write Date
     public void setWriteDate(String writeDate) {
     }
 }

@@ -28,7 +28,6 @@ import java.util.Calendar;
 public class AlarmSetPage extends AppCompatActivity {
     AlarmDatabaseHelper databaseHelper;
 
-
     // TIME PICKING
 
     // Creating Variable
@@ -49,14 +48,11 @@ public class AlarmSetPage extends AppCompatActivity {
     private String email;
     private EditText medicineInput;
 
-
-
     // Function that opens the TimePickup page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarmset);
-
 
         // Putting the buttons and text from the XML file into a variables
         pickTimeBtn = findViewById(R.id.idBtnPickTime);
@@ -78,36 +74,36 @@ public class AlarmSetPage extends AppCompatActivity {
 
         databaseHelper = new AlarmDatabaseHelper(this);
 
-
+        // Receive email from different activity.
         String email = getIntent().getStringExtra("keyemail");
 
-        // Selected Day List
+        // Selected Day List.
         dayList = new ArrayList<String>();
 
-        // Listen when the button is clicked
+        // Listen when the button is clicked.
         pickTimeBtn.setOnClickListener(new View.OnClickListener() {
-            // Function that fixes glitch where it preceding 0
+            // Function that fixes glitch where it preceding 0.
             public String checkDigit(int number) {
-                // if the number is smaller than 9 then add "0" at the front
+                // if the number is smaller than 9 then add "0" at the front.
                 return number <= 9 ? "0" + number : String.valueOf(number);
             }
 
-            // Function that gets the Time from the Calendar
+            // Function that gets the Time from the Calendar.
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
-                // Set integer variables to the separated time parts
+                // Set integer variables to the separated time parts.
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(AlarmSetPage.this,
                         new TimePickerDialog.OnTimeSetListener() {
 
-                            // Function that changes the TextView to the Setted time
+                            // Function that changes the TextView to the Set time.
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 selectedTimeTV.setText(checkDigit(hourOfDay) + ":" + checkDigit(minute));
-                                // set it to a variable
+                                // set it to a variable.
                                 timeset = (checkDigit(hourOfDay) + ":" + checkDigit(minute));
                                 Log.d("Time Set to", "" + timeset);
                             }
@@ -131,9 +127,9 @@ public class AlarmSetPage extends AppCompatActivity {
                 // If the time hasn't been selected, show toast
                 Log.d("Time selected", "" + timeset);
                 if (timeset == null) {
-                    Toast.makeText(AlarmSetPage.this, "Please set the time for the Alarm", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(AlarmSetPage.this, "Please set the time for the Alarm",
+                                    Toast.LENGTH_SHORT).show();
+                } else {
                     timeSelected = true;
                 }
 
@@ -144,42 +140,39 @@ public class AlarmSetPage extends AppCompatActivity {
 
                 // If the day hasn't been selected, show toast
                 if (dayString.isEmpty()) {
-                    Toast.makeText(AlarmSetPage.this, "Please select the repeat date", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(AlarmSetPage.this, "Please select the repeat date",
+                                    Toast.LENGTH_SHORT).show();
+                } else {
                     dateSelected = true;
                 }
 
                 // Medicine Name
                 String medicineName = medicineInput.getText().toString();
                 if (medicineName.isEmpty()) {
-                    Toast.makeText(AlarmSetPage.this, "Please Enter the name of the Medicine", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(AlarmSetPage.this, "Please Enter the name of the Medicine",
+                                    Toast.LENGTH_SHORT).show();
+                } else {
                     medicineEntered = true;
                 }
 
-                // If three variables are all filled in then add them to database
+                // If three variables are all filled in then add them to database.
                 if (medicineEntered == true && timeSelected == true && dateSelected == true) {
                     // Write Date
                     SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String writeDate = date.format(Calendar.getInstance().getTime());
 
-                    Boolean insert = databaseHelper.insertAlarm(email, timeset, repeatDay, medicineName, writeDate);
+                    Boolean insert = databaseHelper.insertAlarm(email, timeset, repeatDay,
+                                                                medicineName, writeDate);
 
+                    // If inserted successfully, show toast, and send user to main page.
                     if (insert) {
-                        Toast.makeText(AlarmSetPage.this, "Alarm Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AlarmSetPage.this, "Alarm Added",
+                                        Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", email);
                         startActivity(intent);
                     }
-
-
-                    // Log to test
-                    Log.d("Database List", email + ", " + timeset + ", " + repeatDay + ", " + medicineName +", " + writeDate);
                 }
-
-
             }
         });
     }

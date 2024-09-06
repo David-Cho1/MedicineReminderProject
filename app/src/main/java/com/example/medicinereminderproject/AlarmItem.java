@@ -7,10 +7,13 @@ public class AlarmItem {
     private String repeat;
     private String med;
 
+    // Constructor
     public AlarmItem() {
 
     }
 
+    // Getter and Setter for variables
+    // ID
     public int getId() {
         return id;
     }
@@ -19,6 +22,7 @@ public class AlarmItem {
         this.id = id;
     }
 
+    // Email
     public String getUser() {
         return user;
     }
@@ -27,6 +31,7 @@ public class AlarmItem {
         this.user = user;
     }
 
+    // Time
     public String getTime() {
         return time;
     }
@@ -35,6 +40,7 @@ public class AlarmItem {
         this.time = time;
     }
 
+    // Repeat days
     public String getRepeat() {
         return repeat;
     }
@@ -43,6 +49,7 @@ public class AlarmItem {
         this.repeat = repeat;
     }
 
+    // Medicine Name
     public String getMed() {
         return med;
     }
@@ -51,6 +58,7 @@ public class AlarmItem {
         this.med = med;
     }
 
+    // Write date
     public void setWriteDate(String writeDate) {
     }
 }

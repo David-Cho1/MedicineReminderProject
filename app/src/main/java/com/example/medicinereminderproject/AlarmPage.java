@@ -41,15 +41,12 @@ public class AlarmPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alarm);
 
-
+        // Run Main Function.
         setInit();
     }
 
-
-
-
     private void setInit() {
-        // Setting a variables name
+        // Setting a variables name.
         alarmDB = new AlarmDatabaseHelper(this);
         rv_alarm = findViewById(R.id.alarmsRv);
         btn_write = findViewById(R.id.optionFB);
@@ -77,7 +74,7 @@ public class AlarmPage extends AppCompatActivity {
                 // Show Dialog
                 dialog.show();
 
-                // If new button is pressed
+                // If new button is pressed.
                 newBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     // Open AlarmSet page
@@ -92,18 +89,14 @@ public class AlarmPage extends AppCompatActivity {
         });
     }
 
-
-
+    // Load Data from database and open CustomAdapter.
     private void loadRecentDB() {
-        // Load saved data from database
+        // Load saved data from database.
         alarmItems = alarmDB.getAlarmList(email);
+
+        // Alarm List String.
         String alarmLists = alarmItems.toString();
-        int alarmNum = 0;
-        alarmNum = alarmItems.size();
-        for (int i = 0; i < alarmNum; i++) {
-            Log.d("alarm items at " + i, "" + alarmItems.get(i).getId() +" " +
-                    alarmItems.get(i).getTime()+" " + alarmItems.get(i).getMed()+" " + alarmItems.get(i).getRepeat());
-        }
+
         if(mAdapter == null) {
             mAdapter = new CustomAdapter(alarmItems, this, email);
             rv_alarm.setHasFixedSize(true);

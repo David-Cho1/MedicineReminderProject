@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DiarySetPage extends AppCompatActivity {
+    // Defining Variable names
     private DiaryDatabaseHelper diaryDB;
     private String user;
     private String title;
@@ -43,10 +44,13 @@ public class DiarySetPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_diary_set_page);
 
+        // Get User Email Address
         user = getIntent().getStringExtra("keyemail");
 
+        // Make new instance of Database helper
         diaryDB = new DiaryDatabaseHelper(this);
 
+        // Finding GUI by id and set them into variables
         titleET = findViewById(R.id.titleEditText);
         dateET = findViewById(R.id.dateEditText);
         contentET = findViewById(R.id.contentET);
@@ -64,13 +68,12 @@ public class DiarySetPage extends AppCompatActivity {
                 char characterSlash = '/';
                 int numberOfSlash = 0;
 
-
-
                 // Get values from Edit Text
                 title = titleET.getText().toString();
                 diarydate = dateET.getText().toString();
                 contents = contentET.getText().toString();
 
+                // Run isValidDate and set it to Boolean Value
                 boolean validationDate = isValidDate(diarydate);
 
                 // If the title Length is too long
@@ -79,14 +82,14 @@ public class DiarySetPage extends AppCompatActivity {
 
                 // Show Toast Message
                 if (titleLength > 18) {
-                    errorTitleTV.setText("* Title is too long"); // show error
-                    titleAccept = false; // set title not acceptable
+                    errorTitleTV.setText("* Title is too long");    // show error
+                    titleAccept = false;    // set title not acceptable
                 }
 
                 // If title length is shorter than 18 characters,
                 else if (titleLength < 18) {
-                    titleAccept = true; // set title acceptable
-                    errorTitleTV.setText(""); // set Text to empty
+                    titleAccept = true;     // set title acceptable
+                    errorTitleTV.setText("");   // set Text to empty
                 }
 
                 // If title is left empty
@@ -102,14 +105,10 @@ public class DiarySetPage extends AppCompatActivity {
                     // If febMaxDate is false, show error
                     if (febMaxDate == false) {
                         errorDateTV.setText("* Date doesn't \n exist");
-                    }
-                    // Else show error
-                    else{
+                    } else{
                         errorDateTV.setText("* Incorrect \n Date Format");
                     }
-                }
-
-                else if (validationDate) {
+                } else if (validationDate) {
                     dateAccept = true;
                     errorDateTV.setText("");
                 }
@@ -123,7 +122,8 @@ public class DiarySetPage extends AppCompatActivity {
                 if (titleAccept && dateAccept) {
                     Boolean insert = diaryDB.insertDiary(user, title, contents, diarydate, writeDate);
                     if (insert) {
-                        Toast.makeText(DiarySetPage.this, "Diary Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DiarySetPage.this, "Diary Added",
+                                        Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", user);
                         startActivity(intent);
@@ -167,9 +167,8 @@ public class DiarySetPage extends AppCompatActivity {
                     }
                     // Return true
                     return true;
-                }
-                // If input isn't in Integer value return false
-                catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
+                    // If input isn't in Integer value return false
                     return false;
                 }
 

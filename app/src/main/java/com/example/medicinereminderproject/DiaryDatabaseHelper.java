@@ -35,6 +35,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         MyDatabase.execSQL("drop Table if exists diarytable");
     }
 
+    // Get number of rows in table
     public long getProfilesCount() {
         SQLiteDatabase db = this.getReadableDatabase();
         long count = DatabaseUtils.queryNumEntries(db, "diarytable");
@@ -42,6 +43,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    // Update Diary
     public Boolean updateDiary(String _title, String _content, String _date, int _id) {
         String intID = Integer.toString(_id);
 
@@ -52,9 +54,10 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("date", _date);
 
         db.update("diarytable", contentValues, "id = ?", new String[] {intID});
-
         return true;
     }
+
+    // Get Contents
     public String getContent(String user, String title, String date) {
         String content = "";
 
@@ -66,16 +69,18 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-
         return content;
     }
 
+    // Get Diary ID
     public int getDiaryID(String user, String title, String date, String content) {
         String strId = "";
         int id = 0;
 
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         Cursor cursor = MyDatabase.rawQuery("Select * from diarytable where user = ? and title = ? and date = ? and context = ?", new String[]{user, title, date, content});
+
+        // If there are more than 0 row, return true, if not return false.
         if(cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 strId = cursor.getString(cursor.getColumnIndexOrThrow("id"));
@@ -83,9 +88,10 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-
         return id;
     }
+
+    // Get Diary List
     public ArrayList<DiaryItem> getDiaryList(String _user) {
         ArrayList<DiaryItem> diaryItems = new ArrayList<>();
 
@@ -101,6 +107,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 String writeDate = cursor.getString(cursor.getColumnIndexOrThrow("writeDate"));
 
+                // Set diary into Arraylist
                 DiaryItem diaryItem = new DiaryItem();
                 diaryItem.setId(id);
                 diaryItem.setUser(user);
@@ -112,15 +119,15 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-
         return diaryItems;
     }
 
-
+    // Select Diary
     public Boolean selectDiary(String user, String title, String context) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         Cursor cursor = MyDatabase.rawQuery("Select * from diarytable where user = ? and title = ? and context = ?", new String[]{user, title, context});
 
+        // If there are more than 0 row, return true, if not return false.
         if (cursor.getCount() > 0) {
             return true;
         }
@@ -129,6 +136,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Insert Diary
     public Boolean insertDiary(String user, String title, String context, String date, String writeDate) {
         SQLiteDatabase MyDatabase =  this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -139,6 +147,7 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("writeDate", writeDate);
         long result = MyDatabase.insert("diarytable", null, contentValues);
 
+        // If result == -1 return false, if not return true
         if (result == -1) {
             return false;
         }
@@ -148,10 +157,12 @@ public class DiaryDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // Delete Diary
     public Boolean deleteDiary(String user, String title, String date) {
         SQLiteDatabase MyDatabase = this.getWritableDatabase();
         Cursor cursor = MyDatabase.rawQuery("DELETE FROM diarytable WHERE user = ? and title = ? and date = ?", new String[]{user, title, date});
 
+        // If there are more than 0 row, return true, if not return false.
         if (cursor.getCount() > 0) {
             return true;
         }

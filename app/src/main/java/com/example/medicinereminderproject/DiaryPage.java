@@ -32,7 +32,10 @@ public class DiaryPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_diary);
 
+        // Get email address from different activity
         email = getIntent().getStringExtra("keyemail");
+
+        // Run Main Function
         setInit();
     }
 
@@ -52,7 +55,8 @@ public class DiaryPage extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Clicked", "True");
                 // Pop up page open
-                Dialog dialog = new Dialog(DiaryPage.this, android.R.style.Theme_Material_Light_Dialog);
+                Dialog dialog = new Dialog(DiaryPage.this,
+                                            android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.dialog_diary);
 
                 // Buttons in Dialog

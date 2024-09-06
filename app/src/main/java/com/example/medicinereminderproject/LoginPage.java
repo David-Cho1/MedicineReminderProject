@@ -27,9 +27,11 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        setInit();
 
+        // Run main Function
+        setInit();
     }
+
     // Main Function
     private void setInit() {
         // Making intense for Database Helper
@@ -48,7 +50,7 @@ public class LoginPage extends AppCompatActivity {
         TextView errorPassword = findViewById(R.id.tvErrorPassword);
         TextView errorOr = findViewById(R.id.tvErrorOr);
 
-
+        // Login Button Click Listener
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String email = emailBox.getText().toString();
@@ -60,9 +62,8 @@ public class LoginPage extends AppCompatActivity {
                 if (email.isEmpty()) {
                     errorOr.setText("");
                     errorEmail.setText("* Please enter email address");
-                }
-                // Otherwise set email Valid
-                else {
+                } else {
+                    // Otherwise set email Valid
                     errorEmail.setText("");
                     emailValid = true;
                 }
@@ -71,37 +72,34 @@ public class LoginPage extends AppCompatActivity {
                 if (password.isEmpty()) {
                     errorOr.setText("");
                     errorPassword.setText("* Please enter your password");
-                }
-                // Otherwise set password Valid
-                else {
+                } else {
+                    // Otherwise set password Valid
                     errorPassword.setText("");
                     passwordValid = true;
                 }
 
-                if (emailValid == true && passwordValid == true) {
+                // If emailValid and PasswordValid values are true, Login user
+                if (emailValid && passwordValid) {
                     errorOr.setText("");
                     Boolean checkCredentials = databaseHelper.checkEmailPassword(email, password);
 
-                    Log.d("Sign up Validation", "Email: True \nPassword: True\nConfirm: True");
-                    if (checkCredentials == true) {
-                        Toast.makeText(LoginPage.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    // If check email and password is true
+                    if (checkCredentials) {
+                        Toast.makeText(LoginPage.this, "Login Successfully",
+                                        Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), MainPage.class);
                         intent.putExtra("keyemail", email);
 
-
                         user = email;
                         Log.d("user", "" + user);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         errorEmail.setText("* Invalid Email Address");
                         errorOr.setText("or");
                         errorPassword.setText("* Incorrect Password");
                     }
                 }
-
-
             }
         });
 
@@ -113,8 +111,6 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 }
 
