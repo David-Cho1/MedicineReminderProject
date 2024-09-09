@@ -23,7 +23,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.182" />
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="409dp"
@@ -43,9 +42,6 @@
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </FrameLayout>
-
-
-
 
     <Button
         android:id="@+id/savebutton"

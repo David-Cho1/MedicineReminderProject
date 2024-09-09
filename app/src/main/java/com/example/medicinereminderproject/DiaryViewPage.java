@@ -60,7 +60,7 @@ public class DiaryViewPage extends AppCompatActivity {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DiaryPage.class);
+                Intent intent = new Intent(getApplicationContext(), MainPage.class);
                 intent.putExtra("keyemail", email);
                 startActivity(intent);
             }
